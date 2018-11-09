@@ -1,0 +1,5 @@
+wazo-auth-keys (1.0-1) wazo-dev-stretch; urgency=medium
+
+  * Initial release.
+
+ -- Wazo Maintainers <dev@wazo.community>  Fri, 09 Nov 2018 14:11:32 -0500
