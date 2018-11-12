@@ -17,5 +17,9 @@ setup(
         'console_scripts': [
             'wazo-auth-keys = wazo_auth_keys.main:main',
         ],
+        'wazo_auth_keys.commands': [
+            'service_update = wazo_auth_keys.commands.service:ServiceUpdate',
+            'service_clean = wazo_auth_keys.commands.service:ServiceClean',
+        ],
     },
 )
