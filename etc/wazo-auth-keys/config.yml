@@ -1,0 +1,88 @@
+asterisk:
+  acl:
+    - auth.tenants.read
+    - confd.voicemails.read
+    - confd.voicemails.*.update
+
+wazo-auth:
+  acl:
+    - auth.tenants.read
+    - confd.users.*.read
+
+wazo-call-logd:
+  acl:
+    - auth.tenants.read
+    - confd.lines.read
+    - confd.users.*.read
+
+wazo-dird-xivo-backend:
+  acl:
+    - auth.tenants.read
+    - confd.infos.read
+    - confd.users.read
+
+wazo-plugind:
+  acl:
+    - confd.infos.read
+
+wazo-plugind-cli:
+  acl:
+    - plugind.#
+
+wazo-upgrade:
+  acl:
+    - auth.#
+    - confd.#
+    - plugind.#
+
+xivo-agentd-cli:
+  acl:
+    - agentd.#
+
+xivo-agid:
+  acl:
+    - auth.tenants.read
+    - confd.devices.*.autoprov.read
+    - confd.devices.*.synchronize.read
+    - confd.devices.read
+    - confd.lines.*.devices.*.update
+    - confd.lines.read
+    - confd.users.*.forwards.#
+    - confd.users.*.services.*.*
+    - dird.directories.reverse.*.*.read
+
+xivo-confd:
+  acl:
+    - auth.admin.#
+    - auth.users.#
+
+xivo-ctid:
+  acl:
+    - agentd.#
+    - auth.tenants.read
+    - confd.users.*.services.dnd.update
+    - ctid-ng.#
+    - dird.#
+
+xivo-ctid-ng:
+  acl:
+    - amid.action.Command.create
+    - amid.action.Redirect.create
+    - amid.action.Setvar.create
+    - amid.action.ShowDialplan.create
+    - auth.tenants.read
+    - confd.#
+    - mongooseim.admin
+    - websocketd
+    - websocketd.#
+
+xivo-dird-phoned:
+  acl:
+    - dird.directories.input.*.*.read
+    - dird.directories.lookup.*.*.read
+    - dird.directories.menu.*.*.read
+
+xivo-wizard:
+  acl:
+    - auth.tenants.create
+    - dird.tenants.*.phonebooks.create

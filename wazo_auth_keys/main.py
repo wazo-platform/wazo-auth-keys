@@ -3,9 +3,11 @@
 
 import subprocess
 import sys
+import yaml
 
 from cliff.app import App
 from cliff.commandmanager import CommandManager
+
 from .file_manager import FileManager
 
 
@@ -33,6 +35,11 @@ class WazoAuthKeys(App):
             default='/var/lib/wazo-auth-keys',
             help='The base directory of the file keys',
         )
+        parser.add_argument(
+            '--config',
+            default='/etc/wazo-auth-keys/config.yml',
+            help='The wazo-auth-keys configuration file',
+        )
         return parser
 
     def auth_cli(self, *args, **kwargs):
@@ -51,6 +58,8 @@ class WazoAuthKeys(App):
     def initialize_app(self, argv):
         self.LOG.debug('Wazo Auth Keys')
         self.LOG.debug('options=%s', self.options)
+        with open(self.options.config, 'r') as f:
+            self.services = yaml.load(f)
         self._auth_cli_exe = self.options.wazo_auth_cli
         self.file_manager = FileManager(self, self.options.base_dir)
         self._token = self._create_token()

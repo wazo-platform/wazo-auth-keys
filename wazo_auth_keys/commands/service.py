@@ -9,25 +9,9 @@ from cliff.command import Command
 
 POLICY_NAME_TPL = '{username}-internal'
 
-CONFIG = {
-    'xivo-confd': {
-        'acl': [
-            'auth.users.#',
-            'auth.admin.#',
-        ],
-    },
-    'asterisk': {
-        'acl': [
-            'auth.tenants.read',
-            'confd.voicemails.read',
-            'confd.voicemails.*.read',
-        ],
-    }
-}
-
 
 class ServiceUpdate(Command):
-    "Update all users defined in the config file"
+    "Update or create all users defined in the config file"
 
     def get_parser(self, *args, **kwargs):
         parser = super().get_parser(*args, **kwargs)
@@ -41,7 +25,7 @@ class ServiceUpdate(Command):
     def take_action(self, parsed_args):
         self.app.LOG.debug('Parsed args: %s', parsed_args)
 
-        for name, values in CONFIG.items():
+        for name, values in self.app.services.items():
             if parsed_args.recreate:
                 self._delete_service(name)
                 self.app.file_manager.remove(name)
@@ -133,4 +117,4 @@ class ServiceClean(Command):
             self.app.LOG.debug('Delete all undefined internal users')
             raise NotImplementedError("'--users' is not implemented")
 
-        self.app.file_manager.clean(excludes=list(CONFIG.keys()))
+        self.app.file_manager.clean(excludes=list(self.app.services.keys()))
