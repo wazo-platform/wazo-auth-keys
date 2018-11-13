@@ -6,6 +6,7 @@ import sys
 
 from cliff.app import App
 from cliff.commandmanager import CommandManager
+from .file_manager import FileManager
 
 
 class WazoAuthKeys(App):
@@ -27,6 +28,11 @@ class WazoAuthKeys(App):
             default='/usr/bin/wazo-auth-cli',
             help='The wazo-auth-cli executable',
         )
+        parser.add_argument(
+            '--base-dir',
+            default='/var/lib/wazo-auth-keys',
+            help='The base directory of the file keys',
+        )
         return parser
 
     def auth_cli(self, *args, **kwargs):
@@ -46,6 +52,7 @@ class WazoAuthKeys(App):
         self.LOG.debug('Wazo Auth Keys')
         self.LOG.debug('options=%s', self.options)
         self._auth_cli_exe = self.options.wazo_auth_cli
+        self.file_manager = FileManager(self, self.options.base_dir)
         # TODO check config with: wazo-auth-cli status
 
     def clean_up(self, cmd, result, err):

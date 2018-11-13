@@ -2,16 +2,13 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 import os
-import pwd
 import uuid
 import subprocess
-import yaml
 
 from cliff.command import Command
 
 KEYS_PATH = '/var/lib/wazo-auth-keys'
 FILENAME = os.path.join(KEYS_PATH, '{service_id}-key.yml')
-DONT_CHANGE = -1
 
 CONFIG = {
     'xivo-confd': {
@@ -64,23 +61,7 @@ class ServiceUpdate(Command):
                 self.app.LOG.warning('Unable to create user: %s', name)
                 return
 
-            self.update_file(name, password)
-
-    def update_file(self, service_id, service_key):
-        filename = FILENAME.format(service_id=service_id)
-        self._system_user_map = {pw.pw_name: pw.pw_uid for pw in pwd.getpwall()}
-        self._write_config_file(filename, service_id, service_key)
-        self._change_ownership(filename, service_id)
-        return filename
-
-    def _change_ownership(self, filename, service_id):
-        uid = self._system_user_map.get(service_id, DONT_CHANGE)
-        os.chown(filename, uid, DONT_CHANGE)
-
-    def _write_config_file(self, filename, service_id, service_key):
-        self.app.LOG.debug('Writing %s ...', filename)
-        with open(filename, 'w') as fobj:
-            yaml.safe_dump({'service_id': service_id, 'service_key': service_key}, fobj)
+            self.app.file_manager.update(name, password)
 
 
 class ServiceClean(Command):
@@ -100,10 +81,4 @@ class ServiceClean(Command):
             self.app.LOG.debug('Delete all undefined internal users')
             raise NotImplementedError
 
-        directory_files = os.listdir(KEYS_PATH)
-        generated_files = [FILENAME.format(service_id=service_id) for service_id in CONFIG.keys()]
-        for filename in directory_files:
-            full_path = os.path.join(KEYS_PATH, filename)
-            if full_path not in generated_files:
-                self.app.LOG.debug('Removing %s ...', full_path)
-                os.remove(full_path)
+        self.app.file_manager.clean(excludes=list(CONFIG.keys()))
