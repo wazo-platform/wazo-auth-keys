@@ -37,27 +37,37 @@ class WazoAuthKeys(App):
 
     def auth_cli(self, *args, **kwargs):
         self.LOG.debug('wazo-auth-cli %s ...', ' '.join(args))
-        return_code = subprocess.call(
+        result = subprocess.run(
             [
                 self._auth_cli_exe,
-                '--config', '/root/.config/wazo-auth-cli',
+                '--token', self._token,
                 *args,
             ],
-            stdout=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
             **kwargs,
         )
-        return return_code == 0
+        return result.stdout.decode('utf-8').strip()
 
     def initialize_app(self, argv):
         self.LOG.debug('Wazo Auth Keys')
         self.LOG.debug('options=%s', self.options)
         self._auth_cli_exe = self.options.wazo_auth_cli
         self.file_manager = FileManager(self, self.options.base_dir)
-        # TODO check config with: wazo-auth-cli status
+        self._token = self._create_token()
 
-    def clean_up(self, cmd, result, err):
-        if err:
-            self.LOG.debug('got an error: %s', err)
+    def _create_token(self):
+        result = subprocess.run(
+            [
+                self._auth_cli_exe,
+                '--config', '/root/.config/wazo-auth-cli',
+                'token',
+                'create',
+                '--backend', 'wazo_user',
+            ],
+            check=True,
+            stdout=subprocess.PIPE,
+        )
+        return result.stdout.decode('utf-8').strip()
 
 
 def main(argv=sys.argv[1:]):
