@@ -1,0 +1,17 @@
+debug: True
+foreground: True
+
+db_uri: postgresql://asterisk:proformatique@postgres:5432
+
+amqp:
+  uri: amqp://guest:guest@rabbitmq:5672/
+
+service_discovery:
+  enabled: false
+
+token_cleanup_interval: 2.0
+
+enabled_http_plugins:
+  users: True
+enabled_backend_plugins:
+  wazo_user: True

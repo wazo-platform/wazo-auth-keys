@@ -1,0 +1,14 @@
+FROM wazopbx/wazo-auth-cli
+
+ENV PYTHONDONTWRITEBYTECODE='true'
+
+COPY . /usr/src/wazo-auth-keys
+
+WORKDIR /usr/src/wazo-auth-keys
+RUN python setup.py develop
+
+RUN true \
+    && mkdir -p /var/lib/wazo-auth-keys \
+    && ln -s /usr/local/bin/wazo-auth-cli /usr/bin/wazo-auth-cli
+
+ENTRYPOINT ["./integration_tests/entrypoint.sh"]

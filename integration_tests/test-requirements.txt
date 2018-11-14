@@ -1,0 +1,5 @@
+git+https://github.com/wazo-pbx/xivo-test-helpers.git
+docker
+docker-compose
+nose
+pyhamcrest
