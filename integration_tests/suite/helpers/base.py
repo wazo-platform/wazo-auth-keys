@@ -10,13 +10,3 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
 
     assets_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'assets'))
     service = 'auth-keys'
-
-    @classmethod
-    def _docker_compose_options(cls):
-        return [
-            '--file', os.path.join(cls.assets_root, 'docker-compose.yml'),
-            '--file', os.path.join(
-                cls.assets_root, 'docker-compose.{}.override.yml'.format(cls.asset)
-            ),
-            '--project-name', cls.service,
-        ]
