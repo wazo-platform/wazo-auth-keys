@@ -103,8 +103,24 @@ class ServiceClean(Command):
         return parser
 
     def take_action(self, parsed_args):
+        excludes = list(self.app.services.keys())
         if parsed_args.users:
             self.app.LOG.debug('Delete all undefined internal users')
-            raise NotImplementedError("'--users' is not implemented")
+            self._delete_services(excludes)
 
-        self.app.file_manager.clean(excludes=list(self.app.services.keys()))
+        self.app.file_manager.clean(excludes=excludes)
+
+    def _delete_services(self, excludes=None):
+        excludes = excludes or []
+        excludes.append('wazo-auth-cli')
+        services = self.app.client.users.list(purpose='internal')['items']
+        for service in services:
+            if service['username'] in excludes:
+                continue
+
+            policies = self.app.client.users.get_policies(service['uuid'])['items']
+            for policy in policies:
+                self.app.LOG.debug('Deleting policy: %s', policy['name'])
+                self.app.client.policies.delete(policy['uuid'])
+            self.app.LOG.debug('Deleting user: %s', service['username'])
+            self.app.client.users.delete(service['uuid'])
