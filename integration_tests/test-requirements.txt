@@ -5,3 +5,4 @@ docker
 docker-compose
 nose
 pyhamcrest
+pyyaml

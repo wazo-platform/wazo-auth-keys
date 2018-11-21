@@ -37,17 +37,14 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
             'password': PASSWORD,
             'purpose': 'internal',
         }
-        auth = AuthClient('localhost', cls.service_port(9497, 'auth'), verify_certificate=False)
-        auth.init.run(**body)
+        cls.new_auth().init.run(**body)
 
     @classmethod
     def setup_auth(cls):
-        cls.auth = AuthClient(
-            'localhost',
-            cls.service_port(9497, 'auth'),
-            username=USERNAME,
-            password=PASSWORD,
-            verify_certificate=False,
-        )
+        cls.auth = cls.new_auth(username=USERNAME, password=PASSWORD)
         token = cls.auth.token.new('wazo_user', expiration=3600)
         cls.auth.set_token(token['token'])
+
+    @classmethod
+    def new_auth(cls, **kwargs):
+        return AuthClient('localhost', cls.service_port(9497, 'auth'), verify_certificate=False, **kwargs)
