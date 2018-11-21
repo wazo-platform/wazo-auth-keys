@@ -1,8 +1,6 @@
 # Copyright 2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-import yaml
-
 from hamcrest import (
     assert_that,
     contains_inanyorder,
@@ -19,42 +17,6 @@ from .helpers.base import BaseIntegrationTest
 class TestServiceUpdate(BaseIntegrationTest):
 
     asset = 'base'
-
-    def _service_update(self, recreate=False):
-        flags = []
-        if recreate:
-            flags.append('--recreate')
-
-        output = self.docker_exec(['wazo-auth-keys', 'service', 'update', *flags])
-        result = output.decode('utf-8')
-        print('_service_update result:\n{}'.format(result))
-        return result
-
-    def _list_filenames(self):
-        output = self.docker_exec(['ls', '/var/lib/wazo-auth-keys'])
-        result = output.decode('utf-8').split()
-        print('_list_filenames result: {}'.format(result))
-        return result
-
-    def _get_last_modification_time(self, filename):
-        output = self.docker_exec([
-            'stat',
-            '-c',
-            '%Y',
-            '/var/lib/wazo-auth-keys/{}'.format(filename)
-        ])
-        result = output.decode('utf-8')
-        print('_get_last_modification_time filename: {}, result: {}'.format(filename, result))
-        return result
-
-    def _get_service_config(self, service_name):
-        output = self.docker_exec([
-            'cat',
-            '/var/lib/wazo-auth-keys/{}-key.yml'.format(service_name)
-        ])
-        result = yaml.load(output.decode('utf-8'))
-        print('_get_service_config sevrice: {}, result: {}'.format(service_name, result))
-        return result
 
     def test_create_file_and_user_and_policy(self):
         self._service_update()
