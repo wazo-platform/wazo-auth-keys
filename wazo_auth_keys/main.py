@@ -1,13 +1,16 @@
 # Copyright 2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-import subprocess
+import os
 import sys
 import yaml
 
 from cliff.app import App
 from cliff.commandmanager import CommandManager
 
+from xivo_auth_client import Client
+
+from . import config
 from .file_manager import FileManager
 
 
@@ -21,14 +24,15 @@ class WazoAuthKeys(App):
             command_manager=CommandManager('wazo_auth_keys.commands'),
             version='1.0.0',
         )
-        self._auth_cli_exe = None
+        self._token = None
+        self._client = None
 
     def build_option_parser(self, *args, **kwargs):
         parser = super().build_option_parser(*args, **kwargs)
         parser.add_argument(
-            '--wazo-auth-cli',
-            default='/usr/bin/wazo-auth-cli',
-            help='The wazo-auth-cli executable',
+            '--wazo-auth-cli-config',
+            default=os.getenv('WAZO_AUTH_CLI_CONFIG', '/root/.config/wazo-auth-cli'),
+            help='Extra configuration directory to override the wazo-auth-cli configuration',
         )
         parser.add_argument(
             '--base-dir',
@@ -42,41 +46,30 @@ class WazoAuthKeys(App):
         )
         return parser
 
-    def auth_cli(self, *args, **kwargs):
-        self.LOG.debug('wazo-auth-cli %s ...', ' '.join(args))
-        result = subprocess.run(
-            [
-                self._auth_cli_exe,
-                '--token', self._token,
-                *args,
-            ],
-            stdout=subprocess.PIPE,
-            **kwargs,
-        )
-        return result.stdout.decode('utf-8').strip()
+    @property
+    def client(self):
+        if not self._client:
+            self._client = Client(**self._auth_config)
+
+        if not self._token:
+            self._token = self._client.token.new('wazo_user', expiration=600)['token']
+
+        self._client.set_token(self._token)
+        return self._client
 
     def initialize_app(self, argv):
-        self.LOG.debug('Wazo Auth Keys')
+        self.LOG.debug('wazo-auth-keys')
         self.LOG.debug('options=%s', self.options)
+
+        conf = config.build(self.options)
+        self.LOG.debug('Starting with config: %s', conf)
+
+        self.LOG.debug('client args: %s', conf['auth'])
+        self._auth_config = dict(conf['auth'])
+
         with open(self.options.config, 'r') as f:
             self.services = yaml.load(f)
-        self._auth_cli_exe = self.options.wazo_auth_cli
         self.file_manager = FileManager(self, self.options.base_dir)
-        self._token = self._create_token()
-
-    def _create_token(self):
-        result = subprocess.run(
-            [
-                self._auth_cli_exe,
-                '--config', '/root/.config/wazo-auth-cli',
-                'token',
-                'create',
-                '--backend', 'wazo_user',
-            ],
-            check=True,
-            stdout=subprocess.PIPE,
-        )
-        return result.stdout.decode('utf-8').strip()
 
 
 def main(argv=sys.argv[1:]):

@@ -1,9 +1,7 @@
 # Copyright 2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-import json
 import uuid
-import subprocess
 
 from cliff.command import Command
 
@@ -44,36 +42,28 @@ class ServiceUpdate(Command):
         self._create_service_policy(username, service_uuid, acl)
 
     def _get_service_uuid(self, name):
-        service = self.app.auth_cli('user', 'show', name, stderr=subprocess.DEVNULL)
-        if not service:
+        services = self.app.client.users.list(username=name)['items']
+        self.app.LOG.debug(services)
+        if not services:
             return
-        service = json.loads(service)
-        return service['uuid']
+        return services[0]['uuid']
 
     def _delete_service(self, name):
         service_uuid = self._get_service_uuid(name)
         if not service_uuid:
             return
 
-        self.app.auth_cli('user', 'delete', service_uuid, check=True)
+        self.app.client.users.delete(service_uuid)
 
     def _create_service(self, name, password):
-        service_uuid = self.app.auth_cli(
-            'user',
-            'create',
-            '--password', password,
-            # '--tenant', wazo_auth_cli_tenant,
-            name,
-            check=True,
-        )
-        return service_uuid
+        service = self.app.client.users.new(username=name, password=password, purpose='internal')
+        return service['uuid']
 
     def _get_policy_uuid(self, name):
-        policy = self.app.auth_cli('policy', 'show', name, stderr=subprocess.DEVNULL)
-        if not policy:
+        policies = self.app.client.policies.list(name=name)['items']
+        if not policies:
             return
-        policy = json.loads(policy)
-        return policy['uuid']
+        return policies[0]['uuid']
 
     def _delete_service_policy(self, username):
         name = POLICY_NAME_TPL.format(username=username)
@@ -81,23 +71,12 @@ class ServiceUpdate(Command):
         if not policy_uuid:
             return
 
-        self.app.auth_cli('policy', 'delete', policy_uuid, check=True)
+        self.app.client.policies.delete(policy_uuid)
 
     def _create_service_policy(self, username, service_uuid, acl):
         name = POLICY_NAME_TPL.format(username=username)
-        args = []
-        if acl:
-            args = ['--acl', *acl]
-        policy_uuid = self.app.auth_cli(
-            'policy',
-            'create',
-            # '--tenant', wazo_auth_cli_tenant,
-            name,
-            *args,
-            check=True,
-        )
-
-        self.app.auth_cli('user', 'add', '--policy', policy_uuid, service_uuid, check=True)
+        policy = self.app.client.policies.new(name, acl_templates=acl)
+        self.app.client.users.add_policy(service_uuid, policy['uuid'])
 
 
 class ServiceClean(Command):
