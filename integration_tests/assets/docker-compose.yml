@@ -7,8 +7,11 @@ services:
 
   auth-keys:
     image: wazo-auth-keys-test
+    environment:
+      WAZO_AUTH_CLI_CONFIG: /root/.config/wazo-auth-cli
     volumes:
       - "../..:/usr/src/wazo-auth-keys"
+      - "./etc/wazo-auth-cli:/root/.config/wazo-auth-cli"
 
   auth:
     image: wazopbx/wazo-auth
@@ -18,6 +21,7 @@ services:
       XIVO_UUID: the-predefined-xivo-uuid
     volumes:
       - "./etc/wazo-auth/conf.d/config.yml:/etc/wazo-auth/conf.d/config.yml"
+      - "./init-auth-key:/tmp/init.key"
 
   postgres:
     image: wazo-auth-db

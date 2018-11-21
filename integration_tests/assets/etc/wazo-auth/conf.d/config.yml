@@ -11,7 +11,11 @@ service_discovery:
 
 token_cleanup_interval: 2.0
 
+init_key_filename: /tmp/init.key  # bootstrap setup
+
 enabled_http_plugins:
+  init: True  # bootstrap setup
   users: True
+
 enabled_backend_plugins:
   wazo_user: True
