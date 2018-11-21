@@ -11,6 +11,7 @@ services:
       WAZO_AUTH_CLI_CONFIG: /root/.config/wazo-auth-cli
     volumes:
       - "../..:/usr/src/wazo-auth-keys"
+      - "./etc/wazo-auth-keys/config.yml:/etc/wazo-auth-keys/config.yml"
       - "./etc/wazo-auth-cli:/root/.config/wazo-auth-cli"
 
   auth:

@@ -9,6 +9,9 @@ from xivo_auth_client import Client as AuthClient
 ASSETS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'assets'))
 KEY_FILENAME = os.path.join(ASSETS, 'init-auth-key')
 
+USERNAME = 'wazo-auth-cli'
+PASSWORD = 'secret'
+
 
 class BaseIntegrationTest(AssetLaunchingTestCase):
 
@@ -19,6 +22,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.complete_wazo_auth_bootstrap()
+        cls.setup_auth()
 
     @classmethod
     def complete_wazo_auth_bootstrap(cls):
@@ -29,9 +33,21 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
 
         body = {
             'key': key,
-            'username': 'wazo-auth-cli',
-            'password': 'secret',
+            'username': USERNAME,
+            'password': PASSWORD,
             'purpose': 'internal',
         }
         auth = AuthClient('localhost', cls.service_port(9497, 'auth'), verify_certificate=False)
         auth.init.run(**body)
+
+    @classmethod
+    def setup_auth(cls):
+        cls.auth = AuthClient(
+            'localhost',
+            cls.service_port(9497, 'auth'),
+            username=USERNAME,
+            password=PASSWORD,
+            verify_certificate=False,
+        )
+        token = cls.auth.token.new('wazo_user', expiration=3600)
+        cls.auth.set_token(token['token'])

@@ -15,6 +15,9 @@ init_key_filename: /tmp/init.key  # bootstrap setup
 
 enabled_http_plugins:
   init: True  # bootstrap setup
+  policies: True
+  tokens: True
+  user_policy': True
   users: True
 
 enabled_backend_plugins:
