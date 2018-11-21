@@ -18,6 +18,7 @@ Depends:
  ${misc:Depends},
  python3-requests,
  python3-stevedore,
+ wazo-auth-cli,
  xivo-auth-client-python3,
  xivo-lib-rest-client-python3
 Description: wazo-auth-keys script
