@@ -50,6 +50,12 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     def new_auth(cls, **kwargs):
         return AuthClient('localhost', cls.service_port(9497, 'auth'), verify_certificate=False, **kwargs)
 
+    def _service_clean(self):
+        output = self.docker_exec(['wazo-auth-keys', 'service', 'clean'])
+        result = output.decode('utf-8')
+        print('_service_clean result:\n{}'.format(result))
+        return result
+
     def _service_update(self, recreate=False):
         flags = []
         if recreate:
@@ -65,6 +71,9 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         result = output.decode('utf-8').split()
         print('_list_filenames result: {}'.format(result))
         return result
+
+    def _create_filename(self, filename):
+        self.docker_exec(['touch', '/var/lib/wazo-auth-keys/{}'.format(filename)])
 
     def _get_last_modification_time(self, filename):
         output = self.docker_exec([
