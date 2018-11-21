@@ -26,30 +26,35 @@ class ServiceUpdate(Command):
         for name, values in self.app.services.items():
             if parsed_args.recreate:
                 self._delete_service(name)
+                self._delete_policy(name)
                 self.app.file_manager.remove(name)
 
-            service_uuid = None
+            service_uuid = self._find_service_uuid(name)
             if not self.app.file_manager.service_exists(name):
+                if service_uuid:
+                    self.app.LOG.warning(
+                        "User exists but not the file associated. Please use '--recreate' option"
+                    )
+                    return
                 password = str(uuid.uuid4())
                 service_uuid = self._create_service(name, password)
                 self.app.file_manager.update(name, password)
+            else:
+                if not service_uuid:
+                    self.app.LOG.warning(
+                        "File exists but not the user associated. Please use '--recreate' option"
+                    )
+                    return
 
-            service_uuid = service_uuid or self._get_service_uuid(name)
-            self._update_service_policy(name, service_uuid, values['acl'])
+            self._create_or_update_service_policy(name, service_uuid, values['acl'])
 
-    def _update_service_policy(self, username, service_uuid, acl):
-        self._delete_service_policy(username)
-        self._create_service_policy(username, service_uuid, acl)
-
-    def _get_service_uuid(self, name):
+    def _find_service_uuid(self, name):
         services = self.app.client.users.list(username=name)['items']
-        self.app.LOG.debug(services)
-        if not services:
-            return
-        return services[0]['uuid']
+        for service in services:
+            return service['uuid']
 
     def _delete_service(self, name):
-        service_uuid = self._get_service_uuid(name)
+        service_uuid = self._find_service_uuid(name)
         if not service_uuid:
             return
 
@@ -59,24 +64,30 @@ class ServiceUpdate(Command):
         service = self.app.client.users.new(username=name, password=password, purpose='internal')
         return service['uuid']
 
-    def _get_policy_uuid(self, name):
+    def _find_policy(self, name):
         policies = self.app.client.policies.list(name=name)['items']
-        if not policies:
-            return
-        return policies[0]['uuid']
+        for policy in policies:
+            return policy
 
-    def _delete_service_policy(self, username):
+    def _delete_policy(self, username):
         name = POLICY_NAME_TPL.format(username=username)
-        policy_uuid = self._get_policy_uuid(name)
-        if not policy_uuid:
+        policy = self._find_policy(name)
+        if not policy:
             return
 
-        self.app.client.policies.delete(policy_uuid)
+        self.app.client.policies.delete(policy['uuid'])
 
-    def _create_service_policy(self, username, service_uuid, acl):
+    def _create_or_update_service_policy(self, username, service_uuid, acl):
         name = POLICY_NAME_TPL.format(username=username)
-        policy = self.app.client.policies.new(name, acl_templates=acl)
-        self.app.client.users.add_policy(service_uuid, policy['uuid'])
+        policy = self._find_policy(name)
+        if not policy:
+            policy = self.app.client.policies.new(name, acl_templates=acl)
+            self.app.client.users.add_policy(service_uuid, policy['uuid'])
+            return
+
+        if sorted(policy['acl_templates']) == sorted(acl):
+            return
+        self.app.client.policies.edit(policy['uuid'], name, acl_templates=acl)
 
 
 class ServiceClean(Command):
