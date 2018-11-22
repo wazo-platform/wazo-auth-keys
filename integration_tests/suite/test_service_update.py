@@ -4,6 +4,7 @@
 from hamcrest import (
     assert_that,
     contains_inanyorder,
+    contains_string,
     empty,
     equal_to,
     has_entries,
@@ -117,3 +118,19 @@ class TestServiceUpdate(BaseIntegrationTest):
         credential = self._get_service_config('service-anonymous')
         auth = self.new_auth(username=credential['service_id'], password=credential['service_key'])
         auth.token.new('wazo_user')
+
+    def test_when_file_exists_without_user(self):
+        self._create_filename('service-anonymous-key.yml')
+        self._delete_service('service-anonymous')
+
+        log = self._service_update()
+
+        assert_that(log, contains_string("Please use '--recreate'"))
+
+    def test_when_user_exists_without_file(self):
+        self._service_update()
+        self._delete_filename('service-anonymous-key.yml')
+
+        log = self._service_update()
+
+        assert_that(log, contains_string("Please use '--recreate'"))

@@ -50,8 +50,12 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     def new_auth(cls, **kwargs):
         return AuthClient('localhost', cls.service_port(9497, 'auth'), verify_certificate=False, **kwargs)
 
-    def _service_clean(self):
-        output = self.docker_exec(['wazo-auth-keys', 'service', 'clean'])
+    def _service_clean(self, users=False):
+        flags = []
+        if users:
+            flags.append('--users')
+
+        output = self.docker_exec(['wazo-auth-keys', 'service', 'clean', *flags])
         result = output.decode('utf-8')
         print('_service_clean result:\n{}'.format(result))
         return result
@@ -75,6 +79,9 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     def _create_filename(self, filename):
         self.docker_exec(['touch', '/var/lib/wazo-auth-keys/{}'.format(filename)])
 
+    def _delete_filename(self, filename):
+        self.docker_exec(['rm', '/var/lib/wazo-auth-keys/{}'.format(filename)])
+
     def _get_last_modification_time(self, filename):
         output = self.docker_exec([
             'stat',
@@ -94,3 +101,9 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         result = yaml.load(output.decode('utf-8'))
         print('_get_service_config sevrice: {}, result: {}'.format(service_name, result))
         return result
+
+    def _delete_service(self, username):
+        services = self.auth.users.list(username='service-anonymous')['items']
+        if not services:
+            return
+        self.auth.users.delete(services[0]['uuid'])
