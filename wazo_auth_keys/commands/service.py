@@ -15,7 +15,7 @@ class ServiceUpdate(Command):
         parser = super().get_parser(*args, **kwargs)
         parser.add_argument(
             '--recreate',
-            help="Delete service before update it",
+            help="Delete service before updating it",
             action='store_true',
         )
         return parser
