@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  sync:
+    depends_on:
+      - auth-keys
+      - auth
+      - postgres
+      - rabbitmq
+    environment:
+      TARGETS: "auth:9497 postgres:5432 rabbitmq:5672"

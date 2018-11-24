@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  sync:
+    image: wazopbx/wait
+    environment:
+      TIMEOUT: "${INTEGRATION_TEST_TIMEOUT}"
+
+  auth-keys:
+    image: wazo-auth-keys-test
+    environment:
+      WAZO_AUTH_CLI_CONFIG: /root/.config/wazo-auth-cli
+    volumes:
+      - "../..:/usr/src/wazo-auth-keys"
+      - "./etc/wazo-auth-keys/config.yml:/etc/wazo-auth-keys/config.yml"
+      - "./etc/wazo-auth-cli:/root/.config/wazo-auth-cli"
+
+  auth:
+    image: wazopbx/wazo-auth
+    ports:
+      - "9497"
+    environment:
+      XIVO_UUID: the-predefined-xivo-uuid
+    volumes:
+      - "./etc/wazo-auth/conf.d/config.yml:/etc/wazo-auth/conf.d/config.yml"
+      - "./init-auth-key:/tmp/init.key"
+
+  postgres:
+    image: wazo-auth-db
+    ports:
+      - "5432"
+
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - "5672"
+    volumes:
+      - type: tmpfs
+        target: /var/lib/rabbitmq

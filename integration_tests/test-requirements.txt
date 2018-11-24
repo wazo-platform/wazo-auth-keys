@@ -1,0 +1,8 @@
+https://github.com/wazo-pbx/xivo-auth-client/archive/master.zip
+https://github.com/wazo-pbx/xivo-lib-rest-client/archive/master.zip
+https://github.com/wazo-pbx/xivo-test-helpers/archive/master.zip
+docker
+docker-compose
+nose
+pyhamcrest
+pyyaml

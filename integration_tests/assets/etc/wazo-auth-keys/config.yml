@@ -1,0 +1,12 @@
+service-standard:
+  acl:
+    - 'random.acl.*'
+    - 'weird.random.#'
+    - 'another.random.read'
+
+service-hashtag:
+  acl:
+    - '#'
+
+service-anonymous:
+  acl: []

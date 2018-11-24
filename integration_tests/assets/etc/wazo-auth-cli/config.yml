@@ -1,0 +1,7 @@
+auth:
+    username: wazo-auth-cli
+    password: secret
+    backend: wazo_user
+    host: auth
+    port: 9497
+    verify_certificate: False
