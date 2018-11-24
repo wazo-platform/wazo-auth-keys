@@ -19,6 +19,10 @@ class TestServiceUpdate(BaseIntegrationTest):
 
     asset = 'base'
 
+    def setUp(self):
+        super().setUp()
+        self._service_update(recreate=True)
+
     def test_create_file_and_user_and_policy(self):
         self._service_update()
         filenames = self._list_filenames()
@@ -67,7 +71,6 @@ class TestServiceUpdate(BaseIntegrationTest):
         )
 
     def test_do_not_recreate_user(self):
-        self._service_update()
         expected_time = self._get_last_modification_time('service-anonymous-key.yml')
 
         self._service_update()
@@ -81,7 +84,6 @@ class TestServiceUpdate(BaseIntegrationTest):
 
     def test_update_policies(self):
         service_name = 'service-standard-internal'
-        self._service_update()
         policy_uuid = self.auth.policies.list(name=service_name)['items'][0]['uuid']
         self.auth.policies.edit(
             policy_uuid,
@@ -107,7 +109,6 @@ class TestServiceUpdate(BaseIntegrationTest):
         )
 
     def test_recreate_user_when_flag_recreate(self):
-        self._service_update()
         first_modification_time = self._get_last_modification_time('service-anonymous-key.yml')
 
         self._service_update(recreate=True)
@@ -128,7 +129,6 @@ class TestServiceUpdate(BaseIntegrationTest):
         assert_that(log, contains_string("Please use '--recreate'"))
 
     def test_when_user_exists_without_file(self):
-        self._service_update()
         self._delete_filename('service-anonymous-key.yml')
 
         log = self._service_update()
