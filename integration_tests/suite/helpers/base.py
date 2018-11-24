@@ -103,7 +103,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         return result
 
     def _delete_service(self, username):
-        services = self.auth.users.list(username='service-anonymous')['items']
+        services = self.auth.users.list(username=username)['items']
         if not services:
             return
         self.auth.users.delete(services[0]['uuid'])
