@@ -25,7 +25,7 @@ services:
       - "./init-auth-key:/tmp/init.key"
 
   postgres:
-    image: wazo-auth-db
+    image: wazopbx/wazo-auth-db
     ports:
       - "5432"
 
