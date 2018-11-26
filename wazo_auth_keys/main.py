@@ -16,7 +16,7 @@ from .file_manager import FileManager
 
 class WazoAuthKeys(App):
 
-    DEFAULT_VERBOSE_LEVEL = 999
+    DEFAULT_VERBOSE_LEVEL = 0
 
     def __init__(self):
         super().__init__(
