@@ -42,6 +42,7 @@ xivo-agentd-cli:
 xivo-agid:
   acl:
     - 'auth.tenants.read'
+    - 'agentd.#'
     - 'confd.devices.*.autoprov.read'
     - 'confd.devices.*.synchronize.read'
     - 'confd.devices.read'
