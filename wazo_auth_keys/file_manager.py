@@ -35,6 +35,8 @@ class FileManager:
 
     def _write_config_file(self, full_path, service_id, service_key):
         self.app.LOG.debug('Writing %s ...', full_path)
+        os.mknod(full_path)
+        os.chmod(full_path, 0o600)
         with open(full_path, 'w') as fobj:
             yaml.safe_dump({'service_id': service_id, 'service_key': service_key}, fobj)
 
