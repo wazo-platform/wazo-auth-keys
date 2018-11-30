@@ -33,6 +33,7 @@ class FileManager:
         uid = self._system_user_map.get(system_user, DONT_CHANGE)
         self.app.LOG.debug('Changing ownership %s ...', full_path)
         os.chown(full_path, uid, DONT_CHANGE)
+        os.chmod(full_path, 0o600)
 
     def _write_config_file(self, full_path, service_id, service_key):
         self.app.LOG.debug('Writing %s ...', full_path)
