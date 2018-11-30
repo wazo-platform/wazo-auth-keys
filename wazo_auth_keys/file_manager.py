@@ -20,7 +20,6 @@ class FileManager:
     def update(self, service_id, service_key):
         full_path = self._full_path_tpl.format(service_id=service_id)
         self._write_config_file(full_path, service_id, service_key)
-        self._change_ownership(full_path, service_id)
 
     def remove(self, service_id):
         full_path = self._full_path_tpl.format(service_id=service_id)
@@ -29,8 +28,10 @@ class FileManager:
         except OSError:
             self.app.LOG.debug('File does not exist: %s', full_path)
 
-    def _change_ownership(self, full_path, service_id):
-        uid = self._system_user_map.get(service_id, DONT_CHANGE)
+    def update_ownership(self, service_id, system_user):
+        full_path = self._full_path_tpl.format(service_id=service_id)
+        uid = self._system_user_map.get(system_user, DONT_CHANGE)
+        self.app.LOG.debug('Changing ownership %s ...', full_path)
         os.chown(full_path, uid, DONT_CHANGE)
 
     def _write_config_file(self, full_path, service_id, service_key):

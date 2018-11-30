@@ -47,6 +47,7 @@ class ServiceUpdate(Command):
                     return
 
             self._create_or_update_service_policy(name, service_uuid, values['acl'])
+            self.app.file_manager.update_ownership(name, values['system_user'])
 
     def _find_service_uuid(self, name):
         services = self.app.client.users.list(username=name)['items']
