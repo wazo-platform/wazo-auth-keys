@@ -35,6 +35,15 @@ class TestServiceUpdate(BaseIntegrationTest):
             )
         )
 
+        owner = self._get_owner('service-anonymous-key.yml')
+        assert_that(owner, equal_to('root'))
+
+        owner = self._get_owner('service-hashtag-key.yml')
+        assert_that(owner, equal_to('my-custom-user'))
+
+        owner = self._get_owner('service-standard-key.yml')
+        assert_that(owner, equal_to('root'))
+
         users = self.auth.users.list()['items']
         assert_that(
             users,
