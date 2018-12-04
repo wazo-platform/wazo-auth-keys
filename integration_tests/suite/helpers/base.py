@@ -76,6 +76,17 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         print('_list_filenames result: {}'.format(result))
         return result
 
+    def _get_owner(self, filename):
+        output = self.docker_exec([
+            'stat',
+            '-c',
+            '%U',
+            '/var/lib/wazo-auth-keys/{}'.format(filename)
+        ])
+        result = output.decode('utf-8').strip()
+        print('_get_owner filename: {}, result: {}'.format(filename, result))
+        return result
+
     def _create_filename(self, filename):
         self.docker_exec(['touch', '/var/lib/wazo-auth-keys/{}'.format(filename)])
 

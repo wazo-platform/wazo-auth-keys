@@ -9,6 +9,7 @@ RUN python setup.py develop
 
 RUN true \
     && mkdir -p /var/lib/wazo-auth-keys \
-    && ln -s /usr/local/bin/wazo-auth-cli /usr/bin/wazo-auth-cli
+    && ln -s /usr/local/bin/wazo-auth-cli /usr/bin/wazo-auth-cli \
+    && adduser --quiet --system my-custom-user
 
 ENTRYPOINT ["./integration_tests/entrypoint.sh"]
