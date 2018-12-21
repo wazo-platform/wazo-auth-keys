@@ -100,4 +100,5 @@ xivo-wizard:
   system_user: www-data
   acl:
     - 'auth.tenants.create'
+    - 'auth.users.create'
     - 'dird.tenants.*.phonebooks.create'
