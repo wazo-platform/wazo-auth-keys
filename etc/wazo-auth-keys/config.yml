@@ -41,6 +41,7 @@ wazo-upgrade:
     - 'auth.#'
     - 'confd.#'
     - 'plugind.#'
+    - 'provd.#'
 
 xivo-agentd-cli:
   system_user: root
@@ -66,6 +67,7 @@ xivo-confd:
   acl:
     - 'auth.admin.#'
     - 'auth.users.#'
+    - 'provd.#'
 
 xivo-ctid:
   system_user: xivo-ctid
@@ -75,6 +77,7 @@ xivo-ctid:
     - 'confd.users.*.services.dnd.update'
     - 'ctid-ng.#'
     - 'dird.#'
+    - 'provd.dev_mgr.*.read'
 
 xivo-ctid-ng:
   system_user: www-data
