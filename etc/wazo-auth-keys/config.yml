@@ -18,6 +18,11 @@ wazo-call-logd:
     - 'confd.lines.read'
     - 'confd.users.*.read'
 
+wazo-dird:
+  system_user: www-data
+  acl:
+    - 'auth.tenants.read'
+
 wazo-dird-wazo-backend:
   system_user: www-data
   acl:
