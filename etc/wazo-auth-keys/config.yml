@@ -99,6 +99,11 @@ xivo-dird-phoned:
     - 'dird.directories.lookup.*.*.read'
     - 'dird.directories.menu.*.*.read'
 
+xivo-provd-cli:
+  system_user: root
+  acl:
+    - 'provd.#'
+
 xivo-wizard:
   system_user: www-data
   acl:
