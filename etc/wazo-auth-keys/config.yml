@@ -47,6 +47,7 @@ wazo-upgrade:
     - 'confd.#'
     - 'plugind.#'
     - 'provd.#'
+    - 'dird.phonebook_move_tenant'
 
 xivo-agentd-cli:
   system_user: root
