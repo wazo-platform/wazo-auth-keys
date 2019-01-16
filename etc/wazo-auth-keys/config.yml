@@ -83,6 +83,7 @@ xivo-ctid-ng:
   system_user: www-data
   acl:
     - 'amid.action.Command.create'
+    - 'amid.action.ConfBridgeList.create'
     - 'amid.action.Redirect.create'
     - 'amid.action.Setvar.create'
     - 'amid.action.ShowDialplan.create'
