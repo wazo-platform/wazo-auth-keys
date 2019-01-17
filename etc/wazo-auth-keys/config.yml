@@ -90,6 +90,7 @@ xivo-ctid-ng:
   acl:
     - 'amid.action.Command.create'
     - 'amid.action.ConfBridgeList.create'
+    - 'amid.action.ConfbridgeKick.create'
     - 'amid.action.Redirect.create'
     - 'amid.action.Setvar.create'
     - 'amid.action.ShowDialplan.create'
