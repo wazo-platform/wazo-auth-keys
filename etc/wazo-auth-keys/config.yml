@@ -124,3 +124,4 @@ xivo-wizard:
     - 'auth.users.create'
     - 'auth.users.*.policies.*.create'
     - 'dird.tenants.*.phonebooks.create'
+    - 'provd.cfg_mgr.configs.create'
