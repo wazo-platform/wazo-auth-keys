@@ -93,6 +93,8 @@ xivo-ctid-ng:
     - 'amid.action.ConfbridgeKick.create'
     - 'amid.action.ConfbridgeMute.create'
     - 'amid.action.ConfbridgeUnmute.create'
+    - 'amid.action.ConfbridgeStartRecord.create'
+    - 'amid.action.ConfbridgeStopRecord.create'
     - 'amid.action.Redirect.create'
     - 'amid.action.Setvar.create'
     - 'amid.action.ShowDialplan.create'
