@@ -18,6 +18,13 @@ wazo-call-logd:
     - 'confd.lines.read'
     - 'confd.users.*.read'
 
+wazo-chatd:
+  system_user: wazo-chatd
+  acl:
+    - 'auth.sessions.read'
+    - 'auth.tenants.read'
+    - 'confd.users.read'
+
 wazo-dird:
   system_user: www-data
   acl:
