@@ -1,5 +1,5 @@
 # Copyright 2018 The Wazo Authors  (see the AUTHORS file)
-# SPDX-License-Identifier: GPL-3.0+
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 from xivo.chain_map import ChainMap
 from xivo.config_helper import parse_config_dir, read_config_file_hierarchy
