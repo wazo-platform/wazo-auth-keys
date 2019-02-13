@@ -21,6 +21,7 @@ wazo-call-logd:
 wazo-chatd:
   system_user: wazo-chatd
   acl:
+    - 'amid.action.DeviceStateList.create'
     - 'auth.sessions.read'
     - 'auth.tenants.read'
     - 'confd.users.read'
