@@ -124,6 +124,12 @@ xivo-dxtora:
   acl:
     - 'provd.dev_mgr.dhcpinfo.create'
 
+xivo-provd:
+  system_user: xivo-provd
+  acl:
+    - 'auth.tenants.read'
+    - 'auth.users.*.tenants.read'
+
 xivo-provd-cli:
   system_user: root
   acl:
