@@ -83,16 +83,6 @@ xivo-confd:
     - 'auth.users.#'
     - 'provd.#'
 
-xivo-ctid:
-  system_user: xivo-ctid
-  acl:
-    - 'agentd.#'
-    - 'auth.tenants.read'
-    - 'confd.users.*.services.dnd.update'
-    - 'ctid-ng.#'
-    - 'dird.#'
-    - 'provd.dev_mgr.devices.*.read'
-
 xivo-ctid-ng:
   system_user: www-data
   acl:
