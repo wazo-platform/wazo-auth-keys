@@ -67,6 +67,7 @@ xivo-agid:
   system_user: xivo-agid
   acl:
     - 'auth.tenants.read'
+    - 'auth.users.*.sessions.read'
     - 'agentd.#'
     - 'confd.devices.*.autoprov.read'
     - 'confd.devices.*.synchronize.read'
