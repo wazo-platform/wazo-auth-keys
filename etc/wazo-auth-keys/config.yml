@@ -130,8 +130,6 @@ xivo-wizard:
   system_user: www-data
   acl:
     - 'auth.policies.read'
-    - 'auth.tenants.create'
     - 'auth.users.create'
     - 'auth.users.*.policies.*.create'
-    - 'dird.tenants.*.phonebooks.create'
     - 'provd.cfg_mgr.configs.create'
