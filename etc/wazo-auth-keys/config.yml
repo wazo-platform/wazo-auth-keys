@@ -76,7 +76,6 @@ xivo-agid:
     - 'confd.lines.*.devices.*.update'
     - 'confd.lines.read'
     - 'confd.users.*.forwards.#'
-    - 'confd.users.*.read'
     - 'confd.users.*.services.*.*'
     - 'dird.directories.reverse.*.*.read'
 
