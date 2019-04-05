@@ -1,2 +1,3 @@
 etc/bash_completion.d
+etc/wazo-auth-keys/conf.d
 var/lib/wazo-auth-keys
