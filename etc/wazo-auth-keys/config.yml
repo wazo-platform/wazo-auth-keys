@@ -122,6 +122,7 @@ xivo-provd:
   system_user: xivo-provd
   acl:
     - 'auth.tenants.read'
+    - 'amid.action.PJSIPNotify.create'
 
 xivo-provd-cli:
   system_user: root
