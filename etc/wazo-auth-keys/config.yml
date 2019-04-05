@@ -57,6 +57,9 @@ wazo-upgrade:
     - 'plugind.#'
     - 'provd.#'
     - 'dird.phonebook_move_tenant'
+    - 'dird.profiles.create'
+    - 'dird.displays.create'
+    - 'dird.backends.*.sources.create'
 
 xivo-agentd-cli:
   system_user: root
