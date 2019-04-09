@@ -102,7 +102,6 @@ xivo-ctid-ng:
     - 'amid.action.ShowDialplan.create'
     - 'auth.tenants.read'
     - 'confd.#'
-    - 'mongooseim.admin'
     - 'websocketd'
     - 'websocketd.#'
 
