@@ -1,4 +1,4 @@
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
@@ -109,7 +109,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
             'cat',
             '/var/lib/wazo-auth-keys/{}-key.yml'.format(service_name)
         ])
-        result = yaml.load(output.decode('utf-8'))
+        result = yaml.safe_load(output.decode('utf-8'))
         print('_get_service_config sevrice: {}, result: {}'.format(service_name, result))
         return result
 
