@@ -90,7 +90,7 @@ xivo-confd:
     - 'auth.users.#'
     - 'provd.#'
 
-xivo-ctid-ng:
+wazo-calld:
   system_user: www-data
   acl:
     - 'amid.action.Command.create'
