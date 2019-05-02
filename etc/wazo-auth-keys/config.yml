@@ -61,6 +61,11 @@ wazo-upgrade:
     - 'dird.displays.create'
     - 'dird.backends.*.sources.create'
 
+xivo-agentd:
+  system_user: xivo-agentd
+  acl:
+    - 'auth.tenants.read'
+
 xivo-agentd-cli:
   system_user: root
   acl:
