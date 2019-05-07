@@ -32,6 +32,12 @@ wazo-dird:
     - 'auth.tenants.read'
     - 'auth.users.*.read'
 
+wazo-dird-conference-backend:
+  system_user: www-data
+  acl:
+    - 'confd.conferences.read'
+    - 'auth.tenants.read'
+
 wazo-dird-wazo-backend:
   system_user: www-data
   acl:
