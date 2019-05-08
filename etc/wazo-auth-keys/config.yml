@@ -1,151 +1,152 @@
-asterisk:
-  system_user: asterisk
-  acl:
-    - 'auth.tenants.read'
-    - 'confd.voicemails.read'
-    - 'confd.voicemails.*.update'
+services:
+  asterisk:
+    system_user: asterisk
+    acl:
+      - 'auth.tenants.read'
+      - 'confd.voicemails.read'
+      - 'confd.voicemails.*.update'
 
-wazo-auth:
-  system_user: wazo-auth
-  acl:
-    - 'auth.tenants.read'
-    - 'confd.users.*.read'
+  wazo-auth:
+    system_user: wazo-auth
+    acl:
+      - 'auth.tenants.read'
+      - 'confd.users.*.read'
 
-wazo-call-logd:
-  system_user: wazo-call-logd
-  acl:
-    - 'auth.tenants.read'
-    - 'confd.lines.read'
-    - 'confd.users.*.read'
+  wazo-call-logd:
+    system_user: wazo-call-logd
+    acl:
+      - 'auth.tenants.read'
+      - 'confd.lines.read'
+      - 'confd.users.*.read'
 
-wazo-chatd:
-  system_user: wazo-chatd
-  acl:
-    - 'amid.action.DeviceStateList.create'
-    - 'auth.sessions.read'
-    - 'auth.tenants.read'
-    - 'confd.users.read'
+  wazo-chatd:
+    system_user: wazo-chatd
+    acl:
+      - 'amid.action.DeviceStateList.create'
+      - 'auth.sessions.read'
+      - 'auth.tenants.read'
+      - 'confd.users.read'
 
-wazo-dird:
-  system_user: www-data
-  acl:
-    - 'auth.tenants.read'
-    - 'auth.users.*.read'
+  wazo-dird:
+    system_user: www-data
+    acl:
+      - 'auth.tenants.read'
+      - 'auth.users.*.read'
 
-wazo-dird-conference-backend:
-  system_user: www-data
-  acl:
-    - 'confd.conferences.read'
-    - 'auth.tenants.read'
+  wazo-dird-conference-backend:
+    system_user: www-data
+    acl:
+      - 'confd.conferences.read'
+      - 'auth.tenants.read'
 
-wazo-dird-wazo-backend:
-  system_user: www-data
-  acl:
-    - 'auth.tenants.read'
-    - 'confd.infos.read'
-    - 'confd.users.read'
+  wazo-dird-wazo-backend:
+    system_user: www-data
+    acl:
+      - 'auth.tenants.read'
+      - 'confd.infos.read'
+      - 'confd.users.read'
 
-wazo-plugind:
-  system_user: wazo-plugind
-  acl:
-    - 'confd.infos.read'
+  wazo-plugind:
+    system_user: wazo-plugind
+    acl:
+      - 'confd.infos.read'
 
-wazo-plugind-cli:
-  system_user: root
-  acl:
-    - 'plugind.#'
+  wazo-plugind-cli:
+    system_user: root
+    acl:
+      - 'plugind.#'
 
-wazo-upgrade:
-  system_user: root
-  acl:
-    - 'auth.#'
-    - 'confd.#'
-    - 'plugind.#'
-    - 'provd.#'
-    - 'dird.phonebook_move_tenant'
-    - 'dird.profiles.#'
-    - 'dird.displays.create'
-    - 'dird.backends.*.sources.create'
+  wazo-upgrade:
+    system_user: root
+    acl:
+      - 'auth.#'
+      - 'confd.#'
+      - 'plugind.#'
+      - 'provd.#'
+      - 'dird.phonebook_move_tenant'
+      - 'dird.profiles.#'
+      - 'dird.displays.create'
+      - 'dird.backends.*.sources.create'
 
-xivo-agentd:
-  system_user: xivo-agentd
-  acl:
-    - 'auth.tenants.read'
+  xivo-agentd:
+    system_user: xivo-agentd
+    acl:
+      - 'auth.tenants.read'
 
-xivo-agentd-cli:
-  system_user: root
-  acl:
-    - 'agentd.#'
+  xivo-agentd-cli:
+    system_user: root
+    acl:
+      - 'agentd.#'
 
-xivo-agid:
-  system_user: xivo-agid
-  acl:
-    - 'auth.tenants.read'
-    - 'auth.users.*.sessions.read'
-    - 'agentd.#'
-    - 'confd.devices.*.autoprov.read'
-    - 'confd.devices.*.synchronize.read'
-    - 'confd.devices.read'
-    - 'confd.groups.*.read'
-    - 'confd.lines.*.devices.*.update'
-    - 'confd.lines.read'
-    - 'confd.users.*.forwards.#'
-    - 'confd.users.*.services.*.*'
-    - 'dird.directories.reverse.*.*.read'
+  xivo-agid:
+    system_user: xivo-agid
+    acl:
+      - 'auth.tenants.read'
+      - 'auth.users.*.sessions.read'
+      - 'agentd.#'
+      - 'confd.devices.*.autoprov.read'
+      - 'confd.devices.*.synchronize.read'
+      - 'confd.devices.read'
+      - 'confd.groups.*.read'
+      - 'confd.lines.*.devices.*.update'
+      - 'confd.lines.read'
+      - 'confd.users.*.forwards.#'
+      - 'confd.users.*.services.*.*'
+      - 'dird.directories.reverse.*.*.read'
 
-xivo-confd:
-  system_user: www-data
-  acl:
-    - 'auth.admin.#'
-    - 'auth.tenants.read'
-    - 'auth.users.#'
-    - 'provd.#'
+  xivo-confd:
+    system_user: www-data
+    acl:
+      - 'auth.admin.#'
+      - 'auth.tenants.read'
+      - 'auth.users.#'
+      - 'provd.#'
 
-wazo-calld:
-  system_user: www-data
-  acl:
-    - 'amid.action.Command.create'
-    - 'amid.action.ConfBridgeList.create'
-    - 'amid.action.ConfbridgeKick.create'
-    - 'amid.action.ConfbridgeMute.create'
-    - 'amid.action.ConfbridgeUnmute.create'
-    - 'amid.action.ConfbridgeStartRecord.create'
-    - 'amid.action.ConfbridgeStopRecord.create'
-    - 'amid.action.Redirect.create'
-    - 'amid.action.Setvar.create'
-    - 'amid.action.ShowDialplan.create'
-    - 'auth.tenants.read'
-    - 'confd.#'
-    - 'websocketd'
-    - 'websocketd.#'
+  wazo-calld:
+    system_user: www-data
+    acl:
+      - 'amid.action.Command.create'
+      - 'amid.action.ConfBridgeList.create'
+      - 'amid.action.ConfbridgeKick.create'
+      - 'amid.action.ConfbridgeMute.create'
+      - 'amid.action.ConfbridgeUnmute.create'
+      - 'amid.action.ConfbridgeStartRecord.create'
+      - 'amid.action.ConfbridgeStopRecord.create'
+      - 'amid.action.Redirect.create'
+      - 'amid.action.Setvar.create'
+      - 'amid.action.ShowDialplan.create'
+      - 'auth.tenants.read'
+      - 'confd.#'
+      - 'websocketd'
+      - 'websocketd.#'
 
-xivo-dird-phoned:
-  system_user: www-data
-  acl:
-    - 'dird.directories.input.*.*.read'
-    - 'dird.directories.lookup.*.*.read'
-    - 'dird.directories.menu.*.*.read'
+  xivo-dird-phoned:
+    system_user: www-data
+    acl:
+      - 'dird.directories.input.*.*.read'
+      - 'dird.directories.lookup.*.*.read'
+      - 'dird.directories.menu.*.*.read'
 
-xivo-dxtora:
-  system_user: xivo-dxtora
-  acl:
-    - 'provd.dev_mgr.dhcpinfo.create'
+  xivo-dxtora:
+    system_user: xivo-dxtora
+    acl:
+      - 'provd.dev_mgr.dhcpinfo.create'
 
-xivo-provd:
-  system_user: xivo-provd
-  acl:
-    - 'auth.tenants.read'
-    - 'amid.action.PJSIPNotify.create'
+  xivo-provd:
+    system_user: xivo-provd
+    acl:
+      - 'auth.tenants.read'
+      - 'amid.action.PJSIPNotify.create'
 
-xivo-provd-cli:
-  system_user: root
-  acl:
-    - 'provd.#'
+  xivo-provd-cli:
+    system_user: root
+    acl:
+      - 'provd.#'
 
-xivo-wizard:
-  system_user: www-data
-  acl:
-    - 'auth.policies.read'
-    - 'auth.users.create'
-    - 'auth.users.*.policies.*.create'
-    - 'provd.cfg_mgr.configs.create'
+  xivo-wizard:
+    system_user: www-data
+    acl:
+      - 'auth.policies.read'
+      - 'auth.users.create'
+      - 'auth.users.*.policies.*.create'
+      - 'provd.cfg_mgr.configs.create'

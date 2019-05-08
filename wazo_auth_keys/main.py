@@ -68,7 +68,9 @@ class WazoAuthKeys(App):
         self._auth_config = dict(conf['auth'])
 
         with open(self.options.config, 'r') as f:
-            self.services = yaml.safe_load(f)
+            configs = yaml.safe_load(f)
+
+        self.services = configs.get('services', {})
         self.file_manager = FileManager(self, self.options.base_dir)
 
 

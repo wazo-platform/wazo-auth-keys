@@ -1,15 +1,16 @@
-service-anonymous:
-  system_user: undefined
-  acl: []
+services:
+  service-anonymous:
+    system_user: undefined
+    acl: []
 
-service-hashtag:
-  system_user: my-custom-user
-  acl:
-    - '#'
+  service-hashtag:
+    system_user: my-custom-user
+    acl:
+      - '#'
 
-service-standard:
-  system_user: root
-  acl:
-    - 'random.acl.*'
-    - 'weird.random.#'
-    - 'another.random.read'
+  service-standard:
+    system_user: root
+    acl:
+      - 'random.acl.*'
+      - 'weird.random.#'
+      - 'another.random.read'
