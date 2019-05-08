@@ -18,6 +18,7 @@ setup(
             'wazo-auth-keys = wazo_auth_keys.main:main',
         ],
         'wazo_auth_keys.commands': [
+            'policy_clean = wazo_auth_keys.commands.policy:PolicyClean',
             'policy_update = wazo_auth_keys.commands.policy:PolicyUpdate',
             'service_clean = wazo_auth_keys.commands.service:ServiceClean',
             'service_update = wazo_auth_keys.commands.service:ServiceUpdate',

@@ -155,3 +155,7 @@ policies:
   wazo_default_admin_policy:
     acl:
       - 'auth.admin.#'
+
+deprecated:
+  policies:
+    - xivo_default_admin_policy

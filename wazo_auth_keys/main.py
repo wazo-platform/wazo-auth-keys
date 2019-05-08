@@ -72,6 +72,7 @@ class WazoAuthKeys(App):
 
         self.services = configs.get('services', {})
         self.policies = configs.get('policies', {})
+        self.deprecated = configs.get('deprecated', {})
         self.file_manager = FileManager(self, self.options.base_dir)
 
 

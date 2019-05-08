@@ -70,6 +70,16 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         print('_service_update result:\n{}'.format(result))
         return result
 
+    def _policy_clean(self, users=False):
+        flags = []
+        if users:
+            flags.append('--users')
+
+        output = self.docker_exec(['wazo-auth-keys', 'policy', 'clean', *flags])
+        result = output.decode('utf-8')
+        print('_policy_clean result:\n{}'.format(result))
+        return result
+
     def _policy_update(self, recreate=False):
         flags = []
         if recreate:

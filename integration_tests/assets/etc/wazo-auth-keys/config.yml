@@ -21,3 +21,8 @@ policies:
     - 'random.acl.*'
     - 'weird.random.#'
     - 'another.random.read'
+
+deprecated:
+  policies:
+    - policy-undefined
+    - policy-deprecated
