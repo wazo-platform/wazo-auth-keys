@@ -150,3 +150,8 @@ services:
       - 'auth.users.create'
       - 'auth.users.*.policies.*.create'
       - 'provd.cfg_mgr.configs.create'
+
+policies:
+  wazo_default_admin_policy:
+    acl:
+      - 'auth.admin.#'

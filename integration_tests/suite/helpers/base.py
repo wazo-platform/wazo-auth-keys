@@ -70,6 +70,16 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         print('_service_update result:\n{}'.format(result))
         return result
 
+    def _policy_update(self, recreate=False):
+        flags = []
+        if recreate:
+            flags.append('--recreate')
+
+        output = self.docker_exec(['wazo-auth-keys', 'policy', 'update', *flags])
+        result = output.decode('utf-8')
+        print('_policy_update result:\n{}'.format(result))
+        return result
+
     def _list_filenames(self):
         output = self.docker_exec(['ls', '/var/lib/wazo-auth-keys'])
         result = output.decode('utf-8').split()

@@ -14,3 +14,10 @@ services:
       - 'random.acl.*'
       - 'weird.random.#'
       - 'another.random.read'
+
+policies:
+  policy-empty: []
+  policy-standard:
+    - 'random.acl.*'
+    - 'weird.random.#'
+    - 'another.random.read'

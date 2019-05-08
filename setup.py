@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from setuptools import setup
@@ -18,8 +18,9 @@ setup(
             'wazo-auth-keys = wazo_auth_keys.main:main',
         ],
         'wazo_auth_keys.commands': [
-            'service_update = wazo_auth_keys.commands.service:ServiceUpdate',
+            'policy_update = wazo_auth_keys.commands.policy:PolicyUpdate',
             'service_clean = wazo_auth_keys.commands.service:ServiceClean',
+            'service_update = wazo_auth_keys.commands.service:ServiceUpdate',
         ],
     },
 )
