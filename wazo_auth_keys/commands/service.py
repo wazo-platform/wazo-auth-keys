@@ -1,4 +1,4 @@
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import uuid
@@ -32,19 +32,19 @@ class ServiceUpdate(Command):
             service_uuid = self._find_service_uuid(name)
             if not self.app.file_manager.service_exists(name):
                 if service_uuid:
-                    self.app.LOG.warning(
-                        "User exists but not the file associated. Please use '--recreate' option"
-                    )
-                    return
+                    raise RuntimeError((
+                        "User ({}) exists but not the file associated. "
+                        "Please use '--recreate' option"
+                    ).format(name))
                 password = str(uuid.uuid4())
                 service_uuid = self._create_service(name, password)
                 self.app.file_manager.update(name, password)
             else:
                 if not service_uuid:
-                    self.app.LOG.warning(
-                        "File exists but not the user associated. Please use '--recreate' option"
-                    )
-                    return
+                    raise RuntimeError((
+                        "File exists but not the user ({}) associated. "
+                        "Please use '--recreate' option"
+                    ).format(name))
 
             self._create_or_update_service_policy(name, service_uuid, values['acl'])
             self.app.file_manager.update_ownership(name, values['system_user'])
