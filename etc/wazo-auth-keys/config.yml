@@ -119,7 +119,7 @@ wazo-calld:
     - 'websocketd'
     - 'websocketd.#'
 
-xivo-dird-phoned:
+wazo-dird-phoned:
   system_user: www-data
   acl:
     - 'dird.directories.input.*.*.read'
