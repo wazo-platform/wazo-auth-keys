@@ -10,7 +10,7 @@ pull-images:
 	docker pull wazopbx/wazo-auth-db
 
 auth-keys-test:
-	docker build --no-cache -t wazo-auth-keys-test -f Dockerfile-auth-keys ..
+	docker build --pull --no-cache -t wazo-auth-keys-test -f Dockerfile-auth-keys ..
 
 db:
 	docker build -f $(AUTH_DIR)/contribs/docker/Dockerfile-db -t wazopbx/wazo-auth-db $(AUTH_DIR)
