@@ -8,7 +8,7 @@ import yaml
 from cliff.app import App
 from cliff.commandmanager import CommandManager
 
-from xivo_auth_client import Client
+from wazo_auth_client import Client
 
 from . import config
 from .file_manager import FileManager
