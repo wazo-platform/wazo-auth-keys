@@ -64,8 +64,9 @@ wazo-upgrade:
     - 'provd.#'
     - 'dird.phonebook_move_tenant'
     - 'dird.profiles.#'
-    - 'dird.displays.create'
+    - 'dird.displays.*'
     - 'dird.backends.*.sources.create'
+    - 'dird.sources.read'
 
 xivo-agentd:
   system_user: xivo-agentd
