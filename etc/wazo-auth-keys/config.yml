@@ -65,6 +65,10 @@ wazo-upgrade:
     - 'dird.#'
     - 'webhookd.#'
 
+wazo-webhookd:
+  system_user: wazo-webhookd
+  acl: []
+
 xivo-agentd:
   system_user: xivo-agentd
   acl:
