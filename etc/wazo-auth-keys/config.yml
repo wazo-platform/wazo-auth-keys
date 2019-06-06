@@ -63,6 +63,11 @@ wazo-upgrade:
     - 'plugind.#'
     - 'provd.#'
     - 'dird.#'
+    - 'webhookd.#'
+
+wazo-webhookd:
+  system_user: wazo-webhookd
+  acl: []
 
 xivo-agentd:
   system_user: xivo-agentd
