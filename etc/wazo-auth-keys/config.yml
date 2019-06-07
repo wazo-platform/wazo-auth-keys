@@ -95,7 +95,7 @@ xivo-agid:
     - 'confd.users.*.services.*.*'
     - 'dird.directories.reverse.*.*.read'
 
-xivo-confd:
+wazo-confd:
   system_user: www-data
   acl:
     - 'auth.admin.#'
