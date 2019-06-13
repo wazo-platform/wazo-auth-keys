@@ -67,7 +67,8 @@ wazo-upgrade:
 
 wazo-webhookd:
   system_user: wazo-webhookd
-  acl: []
+  acl:
+    - 'auth.users.*.read'
 
 xivo-agentd:
   system_user: xivo-agentd
