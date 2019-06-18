@@ -69,6 +69,7 @@ wazo-webhookd:
   system_user: wazo-webhookd
   acl:
     - 'auth.users.*.read'
+    - 'auth.users.*.external.mobile.read'
 
 xivo-agentd:
   system_user: xivo-agentd
