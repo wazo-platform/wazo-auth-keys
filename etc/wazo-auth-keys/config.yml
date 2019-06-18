@@ -70,6 +70,7 @@ wazo-webhookd:
   acl:
     - 'auth.users.*.read'
     - 'auth.users.*.external.mobile.read'
+    - 'auth.mobile.external.config.read'
 
 wazo-agentd:
   system_user: wazo-agentd
