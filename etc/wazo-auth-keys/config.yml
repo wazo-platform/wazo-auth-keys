@@ -71,8 +71,8 @@ wazo-webhookd:
     - 'auth.users.*.read'
     - 'auth.users.*.external.mobile.read'
 
-xivo-agentd:
-  system_user: xivo-agentd
+wazo-agentd:
+  system_user: wazo-agentd
   acl:
     - 'auth.tenants.read'
 
