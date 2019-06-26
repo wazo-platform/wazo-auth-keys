@@ -5,6 +5,16 @@ asterisk:
     - 'confd.voicemails.read'
     - 'confd.voicemails.*.update'
 
+wazo-agentd:
+  system_user: wazo-agentd
+  acl:
+    - 'auth.tenants.read'
+
+wazo-agentd-cli:
+  system_user: root
+  acl:
+    - 'agentd.#'
+
 wazo-auth:
   system_user: wazo-auth
   acl:
@@ -18,6 +28,24 @@ wazo-call-logd:
     - 'confd.lines.read'
     - 'confd.users.*.read'
 
+wazo-calld:
+  system_user: www-data
+  acl:
+    - 'amid.action.Command.create'
+    - 'amid.action.ConfBridgeList.create'
+    - 'amid.action.ConfbridgeKick.create'
+    - 'amid.action.ConfbridgeMute.create'
+    - 'amid.action.ConfbridgeUnmute.create'
+    - 'amid.action.ConfbridgeStartRecord.create'
+    - 'amid.action.ConfbridgeStopRecord.create'
+    - 'amid.action.Redirect.create'
+    - 'amid.action.Setvar.create'
+    - 'amid.action.ShowDialplan.create'
+    - 'auth.tenants.read'
+    - 'confd.#'
+    - 'websocketd'
+    - 'websocketd.#'
+
 wazo-chatd:
   system_user: wazo-chatd
   acl:
@@ -25,6 +53,14 @@ wazo-chatd:
     - 'auth.sessions.read'
     - 'auth.tenants.read'
     - 'confd.users.read'
+
+wazo-confd:
+  system_user: www-data
+  acl:
+    - 'auth.admin.#'
+    - 'auth.tenants.read'
+    - 'auth.users.#'
+    - 'provd.#'
 
 wazo-dird:
   system_user: www-data
@@ -37,6 +73,13 @@ wazo-dird-conference-backend:
   acl:
     - 'confd.conferences.read'
     - 'auth.tenants.read'
+
+wazo-dird-phoned:
+  system_user: www-data
+  acl:
+    - 'dird.directories.input.*.*.read'
+    - 'dird.directories.lookup.*.*.read'
+    - 'dird.directories.menu.*.*.read'
 
 wazo-dird-wazo-backend:
   system_user: www-data
@@ -72,16 +115,6 @@ wazo-webhookd:
     - 'auth.users.*.external.mobile.read'
     - 'auth.mobile.external.config.read'
 
-wazo-agentd:
-  system_user: wazo-agentd
-  acl:
-    - 'auth.tenants.read'
-
-xivo-agentd-cli:
-  system_user: root
-  acl:
-    - 'agentd.#'
-
 xivo-agid:
   system_user: xivo-agid
   acl:
@@ -97,39 +130,6 @@ xivo-agid:
     - 'confd.users.*.forwards.#'
     - 'confd.users.*.services.*.*'
     - 'dird.directories.reverse.*.*.read'
-
-wazo-confd:
-  system_user: www-data
-  acl:
-    - 'auth.admin.#'
-    - 'auth.tenants.read'
-    - 'auth.users.#'
-    - 'provd.#'
-
-wazo-calld:
-  system_user: www-data
-  acl:
-    - 'amid.action.Command.create'
-    - 'amid.action.ConfBridgeList.create'
-    - 'amid.action.ConfbridgeKick.create'
-    - 'amid.action.ConfbridgeMute.create'
-    - 'amid.action.ConfbridgeUnmute.create'
-    - 'amid.action.ConfbridgeStartRecord.create'
-    - 'amid.action.ConfbridgeStopRecord.create'
-    - 'amid.action.Redirect.create'
-    - 'amid.action.Setvar.create'
-    - 'amid.action.ShowDialplan.create'
-    - 'auth.tenants.read'
-    - 'confd.#'
-    - 'websocketd'
-    - 'websocketd.#'
-
-wazo-dird-phoned:
-  system_user: www-data
-  acl:
-    - 'dird.directories.input.*.*.read'
-    - 'dird.directories.lookup.*.*.read'
-    - 'dird.directories.menu.*.*.read'
 
 xivo-dxtora:
   system_user: xivo-dxtora
