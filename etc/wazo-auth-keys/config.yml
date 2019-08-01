@@ -25,6 +25,7 @@ wazo-call-logd:
   system_user: wazo-call-logd
   acl:
     - 'auth.tenants.read'
+    - 'confd.contexts.read'
     - 'confd.lines.read'
     - 'confd.users.*.read'
 
