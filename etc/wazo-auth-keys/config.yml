@@ -137,8 +137,8 @@ xivo-dxtora:
   acl:
     - 'provd.dev_mgr.dhcpinfo.create'
 
-xivo-provd:
-  system_user: xivo-provd
+wazo-provd:
+  system_user: wazo-provd
   acl:
     - 'auth.tenants.read'
     - 'amid.action.PJSIPNotify.create'
