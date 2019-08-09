@@ -99,6 +99,17 @@ wazo-plugind-cli:
   acl:
     - 'plugind.#'
 
+wazo-provd:
+  system_user: wazo-provd
+  acl:
+    - 'auth.tenants.read'
+    - 'amid.action.PJSIPNotify.create'
+
+wazo-provd-cli:
+  system_user: root
+  acl:
+    - 'provd.#'
+
 wazo-upgrade:
   system_user: root
   acl:
@@ -136,17 +147,6 @@ xivo-dxtora:
   system_user: xivo-dxtora
   acl:
     - 'provd.dev_mgr.dhcpinfo.create'
-
-wazo-provd:
-  system_user: wazo-provd
-  acl:
-    - 'auth.tenants.read'
-    - 'amid.action.PJSIPNotify.create'
-
-wazo-provd-cli:
-  system_user: root
-  acl:
-    - 'provd.#'
 
 xivo-wizard:
   system_user: www-data
