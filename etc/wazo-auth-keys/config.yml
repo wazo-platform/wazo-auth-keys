@@ -75,19 +75,19 @@ wazo-dird-conference-backend:
     - 'confd.conferences.read'
     - 'auth.tenants.read'
 
-wazo-dird-phoned:
-  system_user: www-data
-  acl:
-    - 'dird.directories.input.*.*.read'
-    - 'dird.directories.lookup.*.*.read'
-    - 'dird.directories.menu.*.*.read'
-
 wazo-dird-wazo-backend:
   system_user: www-data
   acl:
     - 'auth.tenants.read'
     - 'confd.infos.read'
     - 'confd.users.read'
+
+wazo-phoned:
+  system_user: www-data
+  acl:
+    - 'dird.directories.input.*.*.read'
+    - 'dird.directories.lookup.*.*.read'
+    - 'dird.directories.menu.*.*.read'
 
 wazo-plugind:
   system_user: wazo-plugind
