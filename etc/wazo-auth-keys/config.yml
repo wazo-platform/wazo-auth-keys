@@ -15,6 +15,22 @@ wazo-agentd-cli:
   acl:
     - 'agentd.#'
 
+wazo-agid:
+  system_user: wazo-agid
+  acl:
+    - 'auth.tenants.read'
+    - 'auth.users.*.sessions.read'
+    - 'agentd.#'
+    - 'confd.devices.*.autoprov.read'
+    - 'confd.devices.*.synchronize.read'
+    - 'confd.devices.read'
+    - 'confd.groups.*.read'
+    - 'confd.lines.*.devices.*.update'
+    - 'confd.lines.read'
+    - 'confd.users.*.forwards.#'
+    - 'confd.users.*.services.*.*'
+    - 'dird.directories.reverse.*.*.read'
+
 wazo-auth:
   system_user: wazo-auth
   acl:
@@ -126,22 +142,6 @@ wazo-webhookd:
     - 'auth.users.*.read'
     - 'auth.users.*.external.mobile.read'
     - 'auth.mobile.external.config.read'
-
-wazo-agid:
-  system_user: wazo-agid
-  acl:
-    - 'auth.tenants.read'
-    - 'auth.users.*.sessions.read'
-    - 'agentd.#'
-    - 'confd.devices.*.autoprov.read'
-    - 'confd.devices.*.synchronize.read'
-    - 'confd.devices.read'
-    - 'confd.groups.*.read'
-    - 'confd.lines.*.devices.*.update'
-    - 'confd.lines.read'
-    - 'confd.users.*.forwards.#'
-    - 'confd.users.*.services.*.*'
-    - 'dird.directories.reverse.*.*.read'
 
 xivo-dxtora:
   system_user: xivo-dxtora
