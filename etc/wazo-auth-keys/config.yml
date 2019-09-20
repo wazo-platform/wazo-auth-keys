@@ -98,6 +98,11 @@ wazo-dird-wazo-backend:
     - 'confd.infos.read'
     - 'confd.users.read'
 
+wazo-dxtora:
+  system_user: wazo-dxtora
+  acl:
+    - 'provd.dev_mgr.dhcpinfo.create'
+
 wazo-phoned:
   system_user: www-data
   acl:
@@ -142,11 +147,6 @@ wazo-webhookd:
     - 'auth.users.*.read'
     - 'auth.users.*.external.mobile.read'
     - 'auth.mobile.external.config.read'
-
-xivo-dxtora:
-  system_user: xivo-dxtora
-  acl:
-    - 'provd.dev_mgr.dhcpinfo.create'
 
 xivo-wizard:
   system_user: www-data
