@@ -7,7 +7,7 @@ A small tool to automatically provision/configure service keys in Wazo.
 Configuration to connect to the wazo-auth daemon are fetched from the `wazo-auth-cli`
 configuration. It is possible to specify the wazo-auth-cli configuration directory with the
 `--wazo-auth-cli-config` option or with the environment variable `WAZO_AUTH_CLI_CONFIG`. See the
-[wazo-auth-cli documentation](https://github.com/wazo-pbx/wazo-auth-cli) for more informations.
+[wazo-auth-cli documentation](https://github.com/wazo-platform/wazo-auth-cli) for more informations.
 
 
 ## Configuration

@@ -1,6 +1,6 @@
 Format: http://dep.debian.net/deps/dep5
 Upstream-Name: wazo-auth-keys
-Source: https://github.com/wazo-pbx/wazo-auth-keys.git
+Source: https://github.com/wazo-platform/wazo-auth-keys.git
 
 Files: *
 Copyright: 2018 The Wazo Authors
