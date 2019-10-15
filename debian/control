@@ -20,7 +20,7 @@ Depends:
  python3-stevedore,
  wazo-auth-cli,
  wazo-auth-client-python3,
- xivo-lib-rest-client-python3
+ wazo-lib-rest-client-python3
 Description: wazo-auth-keys script
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
