@@ -111,6 +111,8 @@ wazo-phoned:
     - 'dird.directories.input.*.*.read'
     - 'dird.directories.lookup.*.*.read'
     - 'dird.directories.menu.*.*.read'
+    - 'auth.users.*.read'
+    - 'auth.tenants.read'
 
 wazo-plugind:
   system_user: wazo-plugind
