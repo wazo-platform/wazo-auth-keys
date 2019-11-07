@@ -20,6 +20,7 @@ wazo-agid:
   acl:
     - 'auth.tenants.read'
     - 'auth.users.*.sessions.read'
+    - 'auth.users.*.tokens.read'
     - 'agentd.#'
     - 'confd.devices.*.autoprov.read'
     - 'confd.devices.*.synchronize.read'
