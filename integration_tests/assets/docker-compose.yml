@@ -22,7 +22,6 @@ services:
       XIVO_UUID: the-predefined-xivo-uuid
     volumes:
       - "./etc/wazo-auth/conf.d/config.yml:/etc/wazo-auth/conf.d/config.yml"
-      - "./init-auth-key:/tmp/init.key"
 
   postgres:
     image: wazopbx/wazo-auth-db
