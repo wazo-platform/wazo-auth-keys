@@ -27,18 +27,18 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
 
     @classmethod
     def complete_wazo_auth_bootstrap(cls):
-        with open(KEY_FILENAME, 'r') as f:
-            for line in f:
-                key = line.strip()
-                break
-
-        body = {
-            'key': key,
-            'username': USERNAME,
-            'password': PASSWORD,
-            'purpose': 'internal',
-        }
-        cls.new_auth().init.run(**body)
+        out = cls.docker_exec(
+            [
+                '/usr/local/bin/wazo-auth-bootstrap',
+                'initial-user',
+                '--username',
+                USERNAME,
+                '--password',
+                PASSWORD,
+            ],
+            service_name='auth',
+        )
+        print(out)
 
     @classmethod
     def setup_auth(cls):
@@ -48,7 +48,12 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
 
     @classmethod
     def new_auth(cls, **kwargs):
-        return AuthClient('localhost', cls.service_port(9497, 'auth'), verify_certificate=False, **kwargs)
+        return AuthClient(
+            'localhost',
+            cls.service_port(9497, 'auth'),
+            verify_certificate=False,
+            **kwargs
+        )
 
     def _service_clean(self, users=False):
         flags = []
@@ -77,12 +82,9 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         return result
 
     def _get_owner(self, filename):
-        output = self.docker_exec([
-            'stat',
-            '-c',
-            '%U',
-            '/var/lib/wazo-auth-keys/{}'.format(filename)
-        ])
+        output = self.docker_exec(
+            ['stat', '-c', '%U', '/var/lib/wazo-auth-keys/{}'.format(filename)]
+        )
         result = output.decode('utf-8').strip()
         print('_get_owner filename: {}, result: {}'.format(filename, result))
         return result
@@ -94,23 +96,25 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         self.docker_exec(['rm', '/var/lib/wazo-auth-keys/{}'.format(filename)])
 
     def _get_last_modification_time(self, filename):
-        output = self.docker_exec([
-            'stat',
-            '-c',
-            '%Y',
-            '/var/lib/wazo-auth-keys/{}'.format(filename)
-        ])
+        output = self.docker_exec(
+            ['stat', '-c', '%Y', '/var/lib/wazo-auth-keys/{}'.format(filename)]
+        )
         result = output.decode('utf-8')
-        print('_get_last_modification_time filename: {}, result: {}'.format(filename, result))
+        print(
+            '_get_last_modification_time filename: {}, result: {}'.format(
+                filename, result
+            )
+        )
         return result
 
     def _get_service_config(self, service_name):
-        output = self.docker_exec([
-            'cat',
-            '/var/lib/wazo-auth-keys/{}-key.yml'.format(service_name)
-        ])
+        output = self.docker_exec(
+            ['cat', '/var/lib/wazo-auth-keys/{}-key.yml'.format(service_name)]
+        )
         result = yaml.safe_load(output.decode('utf-8'))
-        print('_get_service_config sevrice: {}, result: {}'.format(service_name, result))
+        print(
+            '_get_service_config sevrice: {}, result: {}'.format(service_name, result)
+        )
         return result
 
     def _delete_service(self, username):
