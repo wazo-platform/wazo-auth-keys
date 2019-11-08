@@ -15,17 +15,16 @@ services:
       - "./etc/wazo-auth-cli:/root/.config/wazo-auth-cli"
 
   auth:
-    image: wazopbx/wazo-auth:buster
+    image: wazopbx/wazo-auth
     ports:
       - "9497"
     environment:
       XIVO_UUID: the-predefined-xivo-uuid
     volumes:
       - "./etc/wazo-auth/conf.d/config.yml:/etc/wazo-auth/conf.d/config.yml"
-      - "./init-auth-key:/tmp/init.key"
 
   postgres:
-    image: wazopbx/wazo-auth-db:buster
+    image: wazopbx/wazo-auth-db
     ports:
       - "5432"
 

@@ -6,8 +6,8 @@ test-setup: egg-info pull-images auth-keys-test
 
 pull-images:
 	docker pull wazopbx/wait
-	docker pull wazopbx/wazo-auth:buster
-	docker pull wazopbx/wazo-auth-db:buster
+	docker pull wazopbx/wazo-auth
+	docker pull wazopbx/wazo-auth-db
 
 auth-keys-test:
 	docker build --pull --no-cache -t wazo-auth-keys-test -f Dockerfile-auth-keys ..
