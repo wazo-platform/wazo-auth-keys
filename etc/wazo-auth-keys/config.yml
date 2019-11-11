@@ -70,6 +70,7 @@ wazo-chatd:
     - 'amid.action.DeviceStateList.create'
     - 'auth.sessions.read'
     - 'auth.tenants.read'
+    - 'auth.tokens.read'
     - 'confd.users.read'
 
 wazo-confd:
