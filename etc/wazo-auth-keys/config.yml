@@ -2,8 +2,8 @@ asterisk:
   system_user: asterisk
   acl:
     - 'auth.tenants.read'
-    - 'confd.voicemails.read'
     - 'confd.voicemails.*.update'
+    - 'confd.voicemails.read'
 
 wazo-agentd:
   system_user: wazo-agentd
@@ -18,10 +18,10 @@ wazo-agentd-cli:
 wazo-agid:
   system_user: wazo-agid
   acl:
+    - 'agentd.#'
     - 'auth.tenants.read'
     - 'auth.users.*.sessions.read'
     - 'auth.users.*.tokens.read'
-    - 'agentd.#'
     - 'confd.devices.*.autoprov.read'
     - 'confd.devices.*.synchronize.read'
     - 'confd.devices.read'
@@ -53,9 +53,9 @@ wazo-calld:
     - 'amid.action.ConfBridgeList.create'
     - 'amid.action.ConfbridgeKick.create'
     - 'amid.action.ConfbridgeMute.create'
-    - 'amid.action.ConfbridgeUnmute.create'
     - 'amid.action.ConfbridgeStartRecord.create'
     - 'amid.action.ConfbridgeStopRecord.create'
+    - 'amid.action.ConfbridgeUnmute.create'
     - 'amid.action.Redirect.create'
     - 'amid.action.Setvar.create'
     - 'amid.action.ShowDialplan.create'
@@ -90,8 +90,8 @@ wazo-dird:
 wazo-dird-conference-backend:
   system_user: www-data
   acl:
-    - 'confd.conferences.read'
     - 'auth.tenants.read'
+    - 'confd.conferences.read'
 
 wazo-dird-wazo-backend:
   system_user: www-data
@@ -108,11 +108,11 @@ wazo-dxtora:
 wazo-phoned:
   system_user: www-data
   acl:
+    - 'auth.tenants.read'
+    - 'auth.users.*.read'
     - 'dird.directories.input.*.*.read'
     - 'dird.directories.lookup.*.*.read'
     - 'dird.directories.menu.*.*.read'
-    - 'auth.users.*.read'
-    - 'auth.tenants.read'
 
 wazo-plugind:
   system_user: wazo-plugind
@@ -127,8 +127,8 @@ wazo-plugind-cli:
 wazo-provd:
   system_user: wazo-provd
   acl:
-    - 'auth.tenants.read'
     - 'amid.action.PJSIPNotify.create'
+    - 'auth.tenants.read'
 
 wazo-provd-cli:
   system_user: root
@@ -140,22 +140,22 @@ wazo-upgrade:
   acl:
     - 'auth.#'
     - 'confd.#'
+    - 'dird.#'
     - 'plugind.#'
     - 'provd.#'
-    - 'dird.#'
     - 'webhookd.#'
 
 wazo-webhookd:
   system_user: wazo-webhookd
   acl:
-    - 'auth.users.*.read'
-    - 'auth.users.*.external.mobile.read'
     - 'auth.mobile.external.config.read'
+    - 'auth.users.*.external.mobile.read'
+    - 'auth.users.*.read'
 
 xivo-wizard:
   system_user: www-data
   acl:
     - 'auth.policies.read'
-    - 'auth.users.create'
     - 'auth.users.*.policies.*.create'
+    - 'auth.users.create'
     - 'provd.cfg_mgr.configs.create'
