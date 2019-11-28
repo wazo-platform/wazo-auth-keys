@@ -110,9 +110,7 @@ wazo-phoned:
   acl:
     - 'auth.tenants.read'
     - 'auth.users.*.read'
-    - 'dird.directories.input.*.*.read'
     - 'dird.directories.lookup.*.*.read'
-    - 'dird.directories.menu.*.*.read'
 
 wazo-plugind:
   system_user: wazo-plugind
