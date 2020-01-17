@@ -111,6 +111,7 @@ wazo-phoned:
   acl:
     - 'auth.tenants.read'
     - 'auth.users.*.read'
+    - 'confd.extensions.features.read'
     - 'dird.directories.lookup.*.*.read'
 
 wazo-plugind:
