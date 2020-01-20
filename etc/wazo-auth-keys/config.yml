@@ -157,3 +157,4 @@ xivo-wizard:
     - 'auth.users.*.policies.*.create'
     - 'auth.users.create'
     - 'provd.cfg_mgr.configs.create'
+    - 'provd.status.read'
