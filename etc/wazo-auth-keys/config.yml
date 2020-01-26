@@ -56,6 +56,7 @@ wazo-calld:
     - 'amid.action.ConfbridgeStartRecord.create'
     - 'amid.action.ConfbridgeStopRecord.create'
     - 'amid.action.ConfbridgeUnmute.create'
+    - 'amid.action.MuteAudio.create'
     - 'amid.action.Redirect.create'
     - 'amid.action.Setvar.create'
     - 'amid.action.ShowDialplan.create'
