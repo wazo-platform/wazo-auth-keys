@@ -21,6 +21,6 @@ Depends:
  wazo-auth-cli,
  wazo-auth-client-python3,
  wazo-lib-rest-client-python3
-Description: wazo-auth-keys script
+Description: A wrapper to wazo-auth-cli to manage internal users
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
