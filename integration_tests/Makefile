@@ -16,7 +16,7 @@ db:
 	docker build -f $(AUTH_DIR)/contribs/docker/Dockerfile-db -t wazopbx/wazo-auth-db $(AUTH_DIR)
 
 test:
-	nosetests -x
+	pytest -x
 
 egg-info:
 	cd .. && python setup.py egg_info
