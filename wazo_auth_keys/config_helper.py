@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-# Copyright 2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2019-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from copy import copy
-
-from six import iteritems
 
 from xivo.chain_map import ChainMap as _ChainMap
 from xivo.config_helper import ConfigParser as _ConfigParser
@@ -28,7 +25,7 @@ class ChainMap(_ChainMap):
     def _deep_update(self, original, new):
         updated = copy(original)
 
-        for key, value in iteritems(new):
+        for key, value in new.items():
             if key not in updated:
                 updated[key] = copy(value)
             elif isinstance(updated[key], dict) and isinstance(value, dict):
