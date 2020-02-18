@@ -109,8 +109,11 @@ wazo-dxtora:
 wazo-phoned:
   system_user: www-data
   acl:
+    - 'amid.action.Command.create'
     - 'auth.tenants.read'
     - 'auth.users.*.read'
+    - 'confd.extensions.features.read'
+    - 'confd.users.*.read'
     - 'dird.directories.lookup.*.*.read'
 
 wazo-plugind:
