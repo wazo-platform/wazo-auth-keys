@@ -143,3 +143,42 @@ class TestServiceUpdate(BaseIntegrationTest):
         log = self._service_update()
 
         assert_that(log, contains_string("Please use '--recreate'"))
+
+    def test_override_policies(self):
+        self._copy_override_filename('override.yml')
+
+        self._service_update(recreate=True)
+
+        users = self.auth.users.list()['items']
+        assert_that(
+            users,
+            has_items(
+                has_entries(username='service-anonymous'),
+                has_entries(username='service-hashtag'),
+                has_entries(username='service-standard'),
+                has_entries(username='service-additional'),
+            )
+        )
+
+        policies = self.auth.policies.list()['items']
+        assert_that(
+            policies,
+            has_items(
+                has_entries(
+                    name='service-hashtag-internal',
+                    acl_templates=contains_inanyorder(
+                        '#',
+                        'additional.acl',
+                    ),
+                ),
+                has_entries(
+                    name='service-additional-internal',
+                    acl_templates=contains_inanyorder(
+                        '#'
+                    ),
+                ),
+            )
+        )
+
+        self._delete_override_filename('override.yml')
+        self._service_update(recreate=True)
