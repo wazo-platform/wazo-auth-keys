@@ -2,7 +2,7 @@
 *.pyc
 *.swp
 .tox
-dist
 build
+dist
 pycodestyle.txt
 pylint.txt

@@ -1,0 +1,9 @@
+service-additional:
+  system_user: undefined
+  acl:
+    - '#'
+
+service-hashtag:
+  system_user: my-custom-user
+  acl:
+    - 'additional.acl'

@@ -8,6 +8,7 @@ WORKDIR /usr/src/wazo-auth-keys
 RUN python setup.py develop
 
 RUN true \
+    && mkdir -p /etc/wazo-auth-keys/conf.d \
     && mkdir -p /var/lib/wazo-auth-keys \
     && ln -s /usr/local/bin/wazo-auth-cli /usr/bin/wazo-auth-cli \
     && adduser --quiet --system my-custom-user

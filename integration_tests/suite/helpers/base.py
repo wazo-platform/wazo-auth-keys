@@ -94,6 +94,13 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     def _delete_filename(self, filename):
         self.docker_exec(['rm', '/var/lib/wazo-auth-keys/{}'.format(filename)])
 
+    def _copy_override_filename(self, filename):
+        override_path = 'etc/wazo-auth-keys/conf.d/{}'.format(filename)
+        self.docker_copy_to_container(os.path.join(ASSETS, override_path), '/{}'.format(override_path))
+
+    def _delete_override_filename(self, filename):
+        self.docker_exec(['rm', '/etc/wazo-auth-keys/conf.d/{}'.format(filename)])
+
     def _get_last_modification_time(self, filename):
         output = self.docker_exec(
             ['stat', '-c', '%Y', '/var/lib/wazo-auth-keys/{}'.format(filename)]

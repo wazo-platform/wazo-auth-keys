@@ -3,7 +3,6 @@
 
 import os
 import sys
-import yaml
 
 from cliff.app import App
 from cliff.commandmanager import CommandManager
@@ -41,8 +40,8 @@ class WazoAuthKeys(App):
         )
         parser.add_argument(
             '--config',
-            default='/etc/wazo-auth-keys/config.yml',
-            help='The wazo-auth-keys configuration file',
+            default='/etc/wazo-auth-keys',
+            help='The wazo-auth-keys configuration directory',
         )
         return parser
 
@@ -67,8 +66,7 @@ class WazoAuthKeys(App):
         self.LOG.debug('client args: %s', conf['auth'])
         self._auth_config = dict(conf['auth'])
 
-        with open(self.options.config, 'r') as f:
-            self.services = yaml.safe_load(f)
+        self.services = config.load_services(self.options)
         self.file_manager = FileManager(self, self.options.base_dir)
 
 
