@@ -1,4 +1,4 @@
-# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import uuid
@@ -14,9 +14,7 @@ class ServiceUpdate(Command):
     def get_parser(self, *args, **kwargs):
         parser = super().get_parser(*args, **kwargs)
         parser.add_argument(
-            '--recreate',
-            help="Delete service before updating it",
-            action='store_true',
+            '--recreate', help="Delete service before updating it", action='store_true',
         )
         return parser
 
@@ -32,19 +30,23 @@ class ServiceUpdate(Command):
             service_uuid = self._find_service_uuid(name)
             if not self.app.file_manager.service_exists(name):
                 if service_uuid:
-                    raise RuntimeError((
-                        "User ({}) exists but not the file associated. "
-                        "Please use '--recreate' option"
-                    ).format(name))
+                    raise RuntimeError(
+                        (
+                            "User ({}) exists but not the file associated. "
+                            "Please use '--recreate' option"
+                        ).format(name)
+                    )
                 password = str(uuid.uuid4())
                 service_uuid = self._create_service(name, password)
                 self.app.file_manager.update(name, password)
             else:
                 if not service_uuid:
-                    raise RuntimeError((
-                        "File exists but not the user ({}) associated. "
-                        "Please use '--recreate' option"
-                    ).format(name))
+                    raise RuntimeError(
+                        (
+                            "File exists but not the user ({}) associated. "
+                            "Please use '--recreate' option"
+                        ).format(name)
+                    )
 
             self._create_or_update_service_policy(name, service_uuid, values['acl'])
             self.app.file_manager.update_ownership(name, values['system_user'])
@@ -62,7 +64,9 @@ class ServiceUpdate(Command):
         self.app.client.users.delete(service_uuid)
 
     def _create_service(self, name, password):
-        service = self.app.client.users.new(username=name, password=password, purpose='internal')
+        service = self.app.client.users.new(
+            username=name, password=password, purpose='internal'
+        )
         return service['uuid']
 
     def _find_policy(self, name):
@@ -97,9 +101,7 @@ class ServiceClean(Command):
     def get_parser(self, *args, **kwargs):
         parser = super().get_parser(*args, **kwargs)
         parser.add_argument(
-            '--users',
-            help="Delete undefined internal users",
-            action='store_true',
+            '--users', help="Delete undefined internal users", action='store_true',
         )
         return parser
 

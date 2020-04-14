@@ -4,4 +4,5 @@ auth:
     backend: wazo_user
     host: auth
     port: 9497
-    verify_certificate: False
+    prefix: null
+    https: False

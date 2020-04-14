@@ -1,4 +1,4 @@
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
@@ -10,7 +10,6 @@ FILENAME_TPL = '{service_id}-key.yml'
 
 
 class FileManager:
-
     def __init__(self, app, base_dir):
         self.app = app
         self._base_dir = base_dir
@@ -52,7 +51,9 @@ class FileManager:
     def clean(self, excludes=None):
         excludes = excludes or []
         directory_filenames = os.listdir(self._base_dir)
-        exclude_filenames = [FILENAME_TPL.format(service_id=service_id) for service_id in excludes]
+        exclude_filenames = [
+            FILENAME_TPL.format(service_id=service_id) for service_id in excludes
+        ]
         for filename in directory_filenames:
             if filename in exclude_filenames:
                 continue
