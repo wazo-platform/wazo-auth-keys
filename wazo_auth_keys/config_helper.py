@@ -8,12 +8,13 @@ from xivo.config_helper import ConfigParser as _ConfigParser
 
 
 class ConfigParser(_ConfigParser):
-
     def read_config_file_hierarchy(self, original_config):
 
         main_config_filename = original_config['config_file']
         main_config = self.parse_config_file(main_config_filename)
-        extra_config_file_directory = ChainMap(main_config, original_config)['extra_config_files']
+        extra_config_file_directory = ChainMap(main_config, original_config)[
+            'extra_config_files'
+        ]
         configs = self.parse_config_dir(extra_config_file_directory)
         configs.append(main_config)
 
@@ -21,7 +22,6 @@ class ConfigParser(_ConfigParser):
 
 
 class ChainMap(_ChainMap):
-
     def _deep_update(self, original, new):
         updated = copy(original)
 

@@ -6,9 +6,7 @@ import os
 from xivo.chain_map import ChainMap
 from xivo.config_helper import parse_config_dir
 
-from wazo_auth_cli.config import (
-    _DEFAULT_CONFIG,
-)
+from wazo_auth_cli.config import _DEFAULT_CONFIG
 
 from .config_helper import read_config_file_hierarchy
 
@@ -25,7 +23,9 @@ def _read_user_config(parsed_args):
 
 def build(parsed_args):
     user_file_config = _read_user_config(parsed_args)
-    system_file_config = read_config_file_hierarchy(ChainMap(user_file_config, _DEFAULT_CONFIG))
+    system_file_config = read_config_file_hierarchy(
+        ChainMap(user_file_config, _DEFAULT_CONFIG)
+    )
     final_config = ChainMap(user_file_config, system_file_config, _DEFAULT_CONFIG)
     return final_config
 

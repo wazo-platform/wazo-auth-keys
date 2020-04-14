@@ -1,4 +1,4 @@
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from hamcrest import (
@@ -32,7 +32,7 @@ class TestServiceUpdate(BaseIntegrationTest):
                 'service-anonymous-key.yml',
                 'service-hashtag-key.yml',
                 'service-standard-key.yml',
-            )
+            ),
         )
 
         owner = self._get_owner('service-anonymous-key.yml')
@@ -51,32 +51,25 @@ class TestServiceUpdate(BaseIntegrationTest):
                 has_entries(username='service-anonymous'),
                 has_entries(username='service-hashtag'),
                 has_entries(username='service-standard'),
-            )
+            ),
         )
 
         policies = self.auth.policies.list()['items']
         assert_that(
             policies,
             has_items(
-                has_entries(
-                    name='service-anonymous-internal',
-                    acl_templates=empty(),
-                ),
+                has_entries(name='service-anonymous-internal', acl_templates=empty(),),
                 has_entries(
                     name='service-hashtag-internal',
-                    acl_templates=contains_inanyorder(
-                        '#'
-                    ),
+                    acl_templates=contains_inanyorder('#'),
                 ),
                 has_entries(
                     name='service-standard-internal',
                     acl_templates=contains_inanyorder(
-                        'random.acl.*',
-                        'weird.random.#',
-                        'another.random.read',
+                        'random.acl.*', 'weird.random.#', 'another.random.read',
                     ),
                 ),
-            )
+            ),
         )
 
     def test_do_not_recreate_user(self):
@@ -84,20 +77,22 @@ class TestServiceUpdate(BaseIntegrationTest):
 
         self._service_update()
 
-        modification_time = self._get_last_modification_time('service-anonymous-key.yml')
+        modification_time = self._get_last_modification_time(
+            'service-anonymous-key.yml'
+        )
         assert_that(modification_time, equal_to(expected_time))
 
         credential = self._get_service_config('service-anonymous')
-        auth = self.new_auth(username=credential['service_id'], password=credential['service_key'])
+        auth = self.new_auth(
+            username=credential['service_id'], password=credential['service_key']
+        )
         auth.token.new('wazo_user')
 
     def test_update_policies(self):
         service_name = 'service-standard-internal'
         policy_uuid = self.auth.policies.list(name=service_name)['items'][0]['uuid']
         self.auth.policies.edit(
-            policy_uuid,
-            name=service_name,
-            acl_templates=['break.all.acl']
+            policy_uuid, name=service_name, acl_templates=['break.all.acl']
         )
 
         self._service_update()
@@ -109,24 +104,28 @@ class TestServiceUpdate(BaseIntegrationTest):
                 has_entries(
                     name=service_name,
                     acl_templates=contains_inanyorder(
-                        'random.acl.*',
-                        'weird.random.#',
-                        'another.random.read',
+                        'random.acl.*', 'weird.random.#', 'another.random.read',
                     ),
                 ),
-            )
+            ),
         )
 
     def test_recreate_user_when_flag_recreate(self):
-        first_modification_time = self._get_last_modification_time('service-anonymous-key.yml')
+        first_modification_time = self._get_last_modification_time(
+            'service-anonymous-key.yml'
+        )
 
         self._service_update(recreate=True)
 
-        modification_time = self._get_last_modification_time('service-anonymous-key.yml')
+        modification_time = self._get_last_modification_time(
+            'service-anonymous-key.yml'
+        )
         assert_that(modification_time, not_(equal_to(first_modification_time)))
 
         credential = self._get_service_config('service-anonymous')
-        auth = self.new_auth(username=credential['service_id'], password=credential['service_key'])
+        auth = self.new_auth(
+            username=credential['service_id'], password=credential['service_key']
+        )
         auth.token.new('wazo_user')
 
     def test_when_file_exists_without_user(self):
@@ -157,7 +156,7 @@ class TestServiceUpdate(BaseIntegrationTest):
                 has_entries(username='service-hashtag'),
                 has_entries(username='service-standard'),
                 has_entries(username='service-additional'),
-            )
+            ),
         )
 
         policies = self.auth.policies.list()['items']
@@ -166,18 +165,13 @@ class TestServiceUpdate(BaseIntegrationTest):
             has_items(
                 has_entries(
                     name='service-hashtag-internal',
-                    acl_templates=contains_inanyorder(
-                        '#',
-                        'additional.acl',
-                    ),
+                    acl_templates=contains_inanyorder('#', 'additional.acl',),
                 ),
                 has_entries(
                     name='service-additional-internal',
-                    acl_templates=contains_inanyorder(
-                        '#'
-                    ),
+                    acl_templates=contains_inanyorder('#'),
                 ),
-            )
+            ),
         )
 
         self._delete_override_filename('override.yml')

@@ -1,4 +1,4 @@
-# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
@@ -96,7 +96,9 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
 
     def _copy_override_filename(self, filename):
         override_path = 'etc/wazo-auth-keys/conf.d/{}'.format(filename)
-        self.docker_copy_to_container(os.path.join(ASSETS, override_path), '/{}'.format(override_path))
+        self.docker_copy_to_container(
+            os.path.join(ASSETS, override_path), '/{}'.format(override_path)
+        )
 
     def _delete_override_filename(self, filename):
         self.docker_exec(['rm', '/etc/wazo-auth-keys/conf.d/{}'.format(filename)])
