@@ -115,6 +115,7 @@ wazo-phoned:
     - 'auth.users.*.read'
     - 'confd.extensions.features.read'
     - 'confd.users.*.read'
+    - 'confd.users.*.services.dnd.update'
     - 'dird.directories.lookup.*.*.read'
 
 wazo-plugind:
