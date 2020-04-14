@@ -50,7 +50,8 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         return AuthClient(
             'localhost',
             cls.service_port(9497, 'auth'),
-            verify_certificate=False,
+            prefix=None,
+            https=False,
             **kwargs
         )
 
