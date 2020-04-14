@@ -1,8 +1,9 @@
 *.egg-info
 *.pyc
 *.swp
+.coverage
 .tox
-build
-dist
+coverage.xml
 pycodestyle.txt
 pylint.txt
+unit-tests.xml
