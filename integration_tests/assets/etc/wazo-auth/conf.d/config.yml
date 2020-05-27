@@ -17,7 +17,7 @@ token_cleanup_interval: 2.0
 enabled_http_plugins:
   policies: True
   tokens: True
-  user_policy': True
+  user_policy: True
   users: True
 
 enabled_backend_plugins:
