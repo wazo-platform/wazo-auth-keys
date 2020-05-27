@@ -28,7 +28,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     def complete_wazo_auth_bootstrap(cls):
         out = cls.docker_exec(
             [
-                '/usr/local/bin/wazo-auth-bootstrap',
+                'wazo-auth-bootstrap',
                 'initial-user',
                 '--username',
                 USERNAME,
