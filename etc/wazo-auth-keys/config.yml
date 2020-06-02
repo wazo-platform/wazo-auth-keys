@@ -69,6 +69,7 @@ wazo-calld:
 wazo-chatd:
   system_user: wazo-chatd
   acl:
+    - 'amid.action.CoreShowChannels.create'
     - 'amid.action.DeviceStateList.create'
     - 'auth.sessions.read'
     - 'auth.tenants.read'
