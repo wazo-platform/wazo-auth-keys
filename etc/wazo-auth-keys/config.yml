@@ -9,6 +9,11 @@ wazo-agentd:
   system_user: wazo-agentd
   acl:
     - 'auth.tenants.read'
+    - 'amid.action.QueueAdd.create'
+    - 'amid.action.QueuePause.create'
+    - 'amid.action.QueuePenalty.create'
+    - 'amid.action.QueueRemove.create'
+    - 'amid.action.UserEvent.create'
 
 wazo-agentd-cli:
   system_user: root
