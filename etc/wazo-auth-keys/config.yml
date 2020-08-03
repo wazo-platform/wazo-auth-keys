@@ -123,6 +123,8 @@ wazo-phoned:
     - 'confd.extensions.features.read'
     - 'confd.users.*.read'
     - 'confd.users.*.services.dnd.update'
+    - 'confd.lines.read'
+    - 'confd.devices.*.read'
     - 'dird.directories.lookup.*.*.read'
 
 wazo-plugind:
