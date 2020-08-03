@@ -68,6 +68,8 @@ wazo-calld:
     - 'amid.action.ShowDialplan.create'
     - 'auth.tenants.read'
     - 'confd.#'
+    - 'phoned.endpoints.*.hold.start'
+    - 'phoned.endpoints.*.hold.stop'
     - 'websocketd'
     - 'websocketd.#'
 
