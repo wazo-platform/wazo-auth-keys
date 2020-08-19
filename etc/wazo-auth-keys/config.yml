@@ -70,6 +70,7 @@ wazo-calld:
     - 'confd.#'
     - 'phoned.endpoints.*.hold.start'
     - 'phoned.endpoints.*.hold.stop'
+    - 'phoned.endpoints.*.answer'
     - 'websocketd'
     - 'websocketd.#'
 
