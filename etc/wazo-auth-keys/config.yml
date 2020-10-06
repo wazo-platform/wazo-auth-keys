@@ -151,6 +151,13 @@ wazo-provd-cli:
   acl:
     - 'provd.#'
 
+wazo-stat:
+  system_user: root
+  acl:
+    - 'auth.tenants.read'
+    - 'confd.queues.read'
+    - 'confd.agents.read'
+
 wazo-upgrade:
   system_user: root
   acl:
