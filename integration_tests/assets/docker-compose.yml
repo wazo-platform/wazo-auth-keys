@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   sync:
-    image: wazopbx/wait
+    image: wazoplatform/wait
     environment:
       TIMEOUT: "${INTEGRATION_TEST_TIMEOUT}"
 
@@ -15,7 +15,7 @@ services:
       - "./etc/wazo-auth-cli:/root/.config/wazo-auth-cli"
 
   auth:
-    image: wazopbx/wazo-auth
+    image: wazoplatform/wazo-auth
     ports:
       - "9497"
     environment:
@@ -24,7 +24,7 @@ services:
       - "./etc/wazo-auth/conf.d/config.yml:/etc/wazo-auth/conf.d/config.yml"
 
   postgres:
-    image: wazopbx/wazo-auth-db
+    image: wazoplatform/wazo-auth-db
     ports:
       - "5432"
 

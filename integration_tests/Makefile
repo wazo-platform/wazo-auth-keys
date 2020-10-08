@@ -8,7 +8,7 @@ auth-keys-test:
 	docker build --pull --no-cache -t wazo-auth-keys-test -f Dockerfile-auth-keys ..
 
 db:
-	docker build -f $(AUTH_DIR)/contribs/docker/Dockerfile-db -t wazopbx/wazo-auth-db $(AUTH_DIR)
+	docker build -f $(AUTH_DIR)/contribs/docker/Dockerfile-db -t wazoplatform/wazo-auth-db $(AUTH_DIR)
 
 test:
 	pytest -x
