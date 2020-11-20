@@ -71,8 +71,6 @@ wazo-calld:
     - 'phoned.endpoints.*.hold.start'
     - 'phoned.endpoints.*.hold.stop'
     - 'phoned.endpoints.*.answer'
-    - 'websocketd'
-    - 'websocketd.#'
 
 wazo-chatd:
   system_user: wazo-chatd
