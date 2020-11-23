@@ -86,13 +86,13 @@ class ServiceUpdate(Command):
         name = POLICY_NAME_TPL.format(username=username)
         policy = self._find_policy(name)
         if not policy:
-            policy = self.app.client.policies.new(name, acl_templates=acl)
+            policy = self.app.client.policies.new(name, acl=acl)
             self.app.client.users.add_policy(service_uuid, policy['uuid'])
             return
 
-        if sorted(policy['acl_templates']) == sorted(acl):
+        if sorted(policy['acl']) == sorted(acl):
             return
-        self.app.client.policies.edit(policy['uuid'], name, acl_templates=acl)
+        self.app.client.policies.edit(policy['uuid'], name, acl=acl)
 
 
 class ServiceClean(Command):
