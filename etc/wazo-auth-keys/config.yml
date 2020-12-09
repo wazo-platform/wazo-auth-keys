@@ -43,6 +43,10 @@ wazo-auth:
     - 'auth.tenants.read'
     - 'confd.users.*.read'
 
+wazo-amid:
+  system_user: wazo-amid
+  acl: []
+
 wazo-call-logd:
   system_user: wazo-call-logd
   acl:
