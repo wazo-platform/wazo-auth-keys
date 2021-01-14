@@ -69,6 +69,7 @@ wazo-calld:
     - 'amid.action.PlayDTMF.create'
     - 'amid.action.Redirect.create'
     - 'amid.action.Setvar.create'
+    - 'amid.action.StopMixMonitor.create'
     - 'amid.action.ShowDialplan.create'
     - 'auth.tenants.read'
     - 'confd.#'
