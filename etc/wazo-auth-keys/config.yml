@@ -19,6 +19,7 @@ wazo-agentd-cli:
   system_user: root
   acl:
     - 'agentd.#'
+    - 'auth.tenants.read'
 
 wazo-agid:
   system_user: wazo-agid
