@@ -1,4 +1,4 @@
-# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import uuid
@@ -14,7 +14,9 @@ class ServiceUpdate(Command):
     def get_parser(self, *args, **kwargs):
         parser = super().get_parser(*args, **kwargs)
         parser.add_argument(
-            '--recreate', help="Delete service before updating it", action='store_true',
+            '--recreate',
+            help="Delete service before updating it",
+            action='store_true',
         )
         return parser
 
@@ -101,7 +103,9 @@ class ServiceClean(Command):
     def get_parser(self, *args, **kwargs):
         parser = super().get_parser(*args, **kwargs)
         parser.add_argument(
-            '--users', help="Delete undefined internal users", action='store_true',
+            '--users',
+            help="Delete undefined internal users",
+            action='store_true',
         )
         return parser
 

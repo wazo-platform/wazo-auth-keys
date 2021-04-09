@@ -1,4 +1,4 @@
-# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from hamcrest import (
@@ -58,7 +58,10 @@ class TestServiceUpdate(BaseIntegrationTest):
         assert_that(
             policies,
             has_items(
-                has_entries(name='service-anonymous-internal', acl_templates=empty(),),
+                has_entries(
+                    name='service-anonymous-internal',
+                    acl_templates=empty(),
+                ),
                 has_entries(
                     name='service-hashtag-internal',
                     acl_templates=contains_inanyorder('#'),
@@ -66,7 +69,9 @@ class TestServiceUpdate(BaseIntegrationTest):
                 has_entries(
                     name='service-standard-internal',
                     acl_templates=contains_inanyorder(
-                        'random.acl.*', 'weird.random.#', 'another.random.read',
+                        'random.acl.*',
+                        'weird.random.#',
+                        'another.random.read',
                     ),
                 ),
             ),
@@ -104,7 +109,9 @@ class TestServiceUpdate(BaseIntegrationTest):
                 has_entries(
                     name=service_name,
                     acl_templates=contains_inanyorder(
-                        'random.acl.*', 'weird.random.#', 'another.random.read',
+                        'random.acl.*',
+                        'weird.random.#',
+                        'another.random.read',
                     ),
                 ),
             ),
@@ -165,7 +172,10 @@ class TestServiceUpdate(BaseIntegrationTest):
             has_items(
                 has_entries(
                     name='service-hashtag-internal',
-                    acl_templates=contains_inanyorder('#', 'additional.acl',),
+                    acl_templates=contains_inanyorder(
+                        '#',
+                        'additional.acl',
+                    ),
                 ),
                 has_entries(
                     name='service-additional-internal',
