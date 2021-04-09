@@ -1,6 +1,20 @@
+- job:
+    name: wazo-tox-integration-auth-keys
+    parent: wazo-tox-integration
+    vars:
+      docker_compose_services_override:
+        - auth-keys
+
 - project:
     templates:
       - wazo-tox-linters
       - wazo-tox-py37
-      - wazo-tox-integration
       - debian-packaging-template
+    check:
+      jobs:
+        - wazo-tox-integration-auth-keys:
+            nodeset: debian10-vm
+    gate:
+      jobs:
+        - wazo-tox-integration-auth-keys:
+            nodeset: debian10-vm
