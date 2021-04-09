@@ -1,4 +1,4 @@
-# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from hamcrest import (
@@ -58,15 +58,20 @@ class TestServiceUpdate(BaseIntegrationTest):
         assert_that(
             policies,
             has_items(
-                has_entries(name='service-anonymous-internal', acl_templates=empty(),),
+                has_entries(
+                    name='service-anonymous-internal',
+                    acl=empty(),
+                ),
                 has_entries(
                     name='service-hashtag-internal',
-                    acl_templates=contains_inanyorder('#'),
+                    acl=contains_inanyorder('#'),
                 ),
                 has_entries(
                     name='service-standard-internal',
-                    acl_templates=contains_inanyorder(
-                        'random.acl.*', 'weird.random.#', 'another.random.read',
+                    acl=contains_inanyorder(
+                        'random.acl.*',
+                        'weird.random.#',
+                        'another.random.read',
                     ),
                 ),
             ),
@@ -91,9 +96,7 @@ class TestServiceUpdate(BaseIntegrationTest):
     def test_update_policies(self):
         service_name = 'service-standard-internal'
         policy_uuid = self.auth.policies.list(name=service_name)['items'][0]['uuid']
-        self.auth.policies.edit(
-            policy_uuid, name=service_name, acl_templates=['break.all.acl']
-        )
+        self.auth.policies.edit(policy_uuid, name=service_name, acl=['break.all.acl'])
 
         self._service_update()
 
@@ -103,8 +106,10 @@ class TestServiceUpdate(BaseIntegrationTest):
             has_items(
                 has_entries(
                     name=service_name,
-                    acl_templates=contains_inanyorder(
-                        'random.acl.*', 'weird.random.#', 'another.random.read',
+                    acl=contains_inanyorder(
+                        'random.acl.*',
+                        'weird.random.#',
+                        'another.random.read',
                     ),
                 ),
             ),
@@ -165,11 +170,14 @@ class TestServiceUpdate(BaseIntegrationTest):
             has_items(
                 has_entries(
                     name='service-hashtag-internal',
-                    acl_templates=contains_inanyorder('#', 'additional.acl',),
+                    acl=contains_inanyorder(
+                        '#',
+                        'additional.acl',
+                    ),
                 ),
                 has_entries(
                     name='service-additional-internal',
-                    acl_templates=contains_inanyorder('#'),
+                    acl=contains_inanyorder('#'),
                 ),
             ),
         )
