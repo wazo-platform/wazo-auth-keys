@@ -5,7 +5,7 @@ backend_policies:
 default_policies:
   wazo_default_user_policy:
     description: 'Default Wazo policy for user'
-    acl':
+    acl:
       - 'agentd.users.me.#'
       - 'auth.users.me.external.#'
       - 'auth.users.me.password.edit'
