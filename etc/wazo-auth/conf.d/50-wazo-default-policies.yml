@@ -43,7 +43,7 @@ default_policies:
       - 'dird.graphql.me'
       - 'dird.personal.#'
       - 'events.auth.users.me.external.#'
-      - 'events.auth.users.me.sessions.*.expire_soon'
+      - 'events.auth.users.me.sessions.my_session.expire_soon'
       - 'events.call_log.user.me.created'
       - 'events.calls.me'
       - 'events.chat.message.*.me'
