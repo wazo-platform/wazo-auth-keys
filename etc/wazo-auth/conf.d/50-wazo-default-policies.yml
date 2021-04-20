@@ -71,6 +71,7 @@ default_policies:
       - 'auth.policies.#'
       - 'auth.tenants.#'
       - 'auth.users.#'
+      - 'call-logd.agents.#'
       - 'call-logd.cdr.#'
       - 'call-logd.queues.#'
       - 'calld.trunks.read'
