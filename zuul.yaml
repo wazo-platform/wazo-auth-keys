@@ -12,9 +12,7 @@
       - debian-packaging-template
     check:
       jobs:
-        - wazo-tox-integration-auth-keys:
-            nodeset: debian10-vm
+        - wazo-tox-integration-auth-keys
     gate:
       jobs:
-        - wazo-tox-integration-auth-keys:
-            nodeset: debian10-vm
+        - wazo-tox-integration-auth-keys
