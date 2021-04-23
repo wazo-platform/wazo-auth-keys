@@ -1,4 +1,4 @@
-# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
@@ -48,7 +48,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     @classmethod
     def new_auth(cls, **kwargs):
         return AuthClient(
-            'localhost',
+            '127.0.0.1',
             cls.service_port(9497, 'auth'),
             prefix=None,
             https=False,
