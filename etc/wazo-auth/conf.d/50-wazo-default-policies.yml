@@ -74,6 +74,7 @@ default_policies:
       - 'call-logd.agents.#'
       - 'call-logd.cdr.#'
       - 'call-logd.queues.#'
+      - 'call-logd.retention.#'
       - 'calld.trunks.read'
       - 'calld.voicemails.*.greetings.#'
       - 'confd.#'
