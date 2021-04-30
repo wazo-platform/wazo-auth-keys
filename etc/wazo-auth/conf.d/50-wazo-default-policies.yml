@@ -73,6 +73,7 @@ default_policies:
       - 'auth.users.#'
       - 'call-logd.agents.#'
       - 'call-logd.cdr.#'
+      - 'call-logd.exports.#'
       - 'call-logd.queues.#'
       - 'call-logd.retention.#'
       - 'calld.trunks.read'
