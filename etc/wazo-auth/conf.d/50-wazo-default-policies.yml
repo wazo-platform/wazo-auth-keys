@@ -83,6 +83,7 @@ default_policies:
       - 'dird.displays.#'
       - 'dird.profiles.#'
       - 'dird.sources.read'
+      - 'dird.tenants.*.phonebooks.#'
       - 'events.#'
       - 'plugind.#'
       - 'provd.cfg_mgr.#'
