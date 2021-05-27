@@ -58,6 +58,11 @@ wazo-call-logd:
     - 'confd.lines.read'
     - 'confd.users.*.read'
 
+wazo-call-logd-export:
+  system_user: wazo-call-logd
+  acl:
+    - 'call-logd.exports.*.download.read'
+
 wazo-calld:
   system_user: www-data
   acl:
