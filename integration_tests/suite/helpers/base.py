@@ -39,6 +39,10 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
             **kwargs
         )
 
+    def _print_to_container_log(self, result):
+        command = ['/bin/bash', '-c', f'echo {result} &> /proc/1/fd/1']
+        self.docker_exec(command, service_name='auth-keys')
+
     def _service_clean(self, users=False):
         flags = []
         if users:
@@ -46,7 +50,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
 
         output = self.docker_exec(['wazo-auth-keys', 'service', 'clean', *flags])
         result = output.decode('utf-8')
-        print('_service_clean result:\n{}'.format(result))
+        self._print_to_container_log('_service_clean result:\n{}'.format(result))
         return result
 
     def _service_update(self, recreate=False):
@@ -56,13 +60,13 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
 
         output = self.docker_exec(['wazo-auth-keys', 'service', 'update', *flags])
         result = output.decode('utf-8')
-        print('_service_update result:\n{}'.format(result))
+        self._print_to_container_log('_service_update result:\n{}'.format(result))
         return result
 
     def _list_filenames(self):
         output = self.docker_exec(['ls', '/var/lib/wazo-auth-keys'])
         result = output.decode('utf-8').split()
-        print('_list_filenames result: {}'.format(result))
+        self._print_to_container_log('_list_filenames result: {}'.format(result))
         return result
 
     def _get_owner(self, filename):
@@ -70,7 +74,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
             ['stat', '-c', '%U', '/var/lib/wazo-auth-keys/{}'.format(filename)]
         )
         result = output.decode('utf-8').strip()
-        print('_get_owner filename: {}, result: {}'.format(filename, result))
+        self._print_to_container_log('_get_owner filename: {}, result: {}'.format(filename, result))
         return result
 
     def _create_filename(self, filename):
@@ -93,7 +97,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
             ['stat', '-c', '%Y', '/var/lib/wazo-auth-keys/{}'.format(filename)]
         )
         result = output.decode('utf-8')
-        print(
+        self._print_to_container_log(
             '_get_last_modification_time filename: {}, result: {}'.format(
                 filename, result
             )
@@ -105,7 +109,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
             ['cat', '/var/lib/wazo-auth-keys/{}-key.yml'.format(service_name)]
         )
         result = yaml.safe_load(output.decode('utf-8'))
-        print(
+        self._print_to_container_log(
             '_get_service_config sevrice: {}, result: {}'.format(service_name, result)
         )
         return result
