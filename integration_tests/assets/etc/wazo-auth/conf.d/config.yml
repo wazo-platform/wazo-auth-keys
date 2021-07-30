@@ -22,3 +22,7 @@ enabled_http_plugins:
 
 enabled_backend_plugins:
   wazo_user: True
+
+bootstrap_user_on_startup: True
+bootstrap_user_username: wazo-auth-cli
+bootstrap_user_password: secret

@@ -21,23 +21,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.complete_wazo_auth_bootstrap()
         cls.setup_auth()
-
-    @classmethod
-    def complete_wazo_auth_bootstrap(cls):
-        out = cls.docker_exec(
-            [
-                'wazo-auth-bootstrap',
-                'initial-user',
-                '--username',
-                USERNAME,
-                '--password',
-                PASSWORD,
-            ],
-            service_name='auth',
-        )
-        print(out)
 
     @classmethod
     def setup_auth(cls):
