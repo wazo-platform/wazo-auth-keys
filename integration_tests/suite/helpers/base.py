@@ -21,23 +21,7 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.complete_wazo_auth_bootstrap()
         cls.setup_auth()
-
-    @classmethod
-    def complete_wazo_auth_bootstrap(cls):
-        out = cls.docker_exec(
-            [
-                'wazo-auth-bootstrap',
-                'initial-user',
-                '--username',
-                USERNAME,
-                '--password',
-                PASSWORD,
-            ],
-            service_name='auth',
-        )
-        print(out)
 
     @classmethod
     def setup_auth(cls):
@@ -52,17 +36,23 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
             cls.service_port(9497, 'auth'),
             prefix=None,
             https=False,
-            **kwargs
+            **kwargs,
         )
+
+    def _print_to_container_log(self, result):
+        cmd = ['/bin/bash', '-c', f'echo {result} &> /proc/1/fd/1']
+        self.docker_exec(cmd)
 
     def _service_clean(self, users=False):
         flags = []
         if users:
             flags.append('--users')
 
-        output = self.docker_exec(['wazo-auth-keys', 'service', 'clean', *flags])
+        cmd = ['wazo-auth-keys', 'service', 'clean', *flags]
+        output = self.docker_exec(cmd)
         result = output.decode('utf-8')
-        print('_service_clean result:\n{}'.format(result))
+        log = f'_service_clean result:\n{result}'
+        self._print_to_container_log(log)
         return result
 
     def _service_update(self, recreate=False):
@@ -70,60 +60,61 @@ class BaseIntegrationTest(AssetLaunchingTestCase):
         if recreate:
             flags.append('--recreate')
 
-        output = self.docker_exec(['wazo-auth-keys', 'service', 'update', *flags])
+        cmd = ['wazo-auth-keys', 'service', 'update', *flags]
+        output = self.docker_exec(cmd)
         result = output.decode('utf-8')
-        print('_service_update result:\n{}'.format(result))
+        log = f'_service_update result:\n{result}'
+        self._print_to_container_log(log)
         return result
 
     def _list_filenames(self):
-        output = self.docker_exec(['ls', '/var/lib/wazo-auth-keys'])
+        cmd = ['ls', '/var/lib/wazo-auth-keys']
+        output = self.docker_exec(cmd)
         result = output.decode('utf-8').split()
-        print('_list_filenames result: {}'.format(result))
+        log = f'_list_filenames result: {result}'
+        self._print_to_container_log(log)
         return result
 
     def _get_owner(self, filename):
-        output = self.docker_exec(
-            ['stat', '-c', '%U', '/var/lib/wazo-auth-keys/{}'.format(filename)]
-        )
+        cmd = ['stat', '-c', '%U', f'/var/lib/wazo-auth-keys/{filename}']
+        output = self.docker_exec(cmd)
         result = output.decode('utf-8').strip()
-        print('_get_owner filename: {}, result: {}'.format(filename, result))
+        log = f'_get_owner filename: {filename}, result: {result}'
+        self._print_to_container_log(log)
         return result
 
     def _create_filename(self, filename):
-        self.docker_exec(['touch', '/var/lib/wazo-auth-keys/{}'.format(filename)])
+        cmd = ['touch', f'/var/lib/wazo-auth-keys/{filename}']
+        self.docker_exec(cmd)
 
     def _delete_filename(self, filename):
-        self.docker_exec(['rm', '/var/lib/wazo-auth-keys/{}'.format(filename)])
+        cmd = ['rm', f'/var/lib/wazo-auth-keys/{filename}']
+        self.docker_exec(cmd)
 
     def _copy_override_filename(self, filename):
-        override_path = 'etc/wazo-auth-keys/conf.d/{}'.format(filename)
+        override_path = f'etc/wazo-auth-keys/conf.d/{filename}'
         self.docker_copy_to_container(
-            os.path.join(ASSETS, override_path), '/{}'.format(override_path)
+            os.path.join(ASSETS, override_path),
+            f'/{override_path}',
         )
 
     def _delete_override_filename(self, filename):
-        self.docker_exec(['rm', '/etc/wazo-auth-keys/conf.d/{}'.format(filename)])
+        self.docker_exec(['rm', f'/etc/wazo-auth-keys/conf.d/{filename}'])
 
     def _get_last_modification_time(self, filename):
-        output = self.docker_exec(
-            ['stat', '-c', '%Y', '/var/lib/wazo-auth-keys/{}'.format(filename)]
-        )
+        cmd = ['stat', '-c', '%Y', f'/var/lib/wazo-auth-keys/{filename}']
+        output = self.docker_exec(cmd)
         result = output.decode('utf-8')
-        print(
-            '_get_last_modification_time filename: {}, result: {}'.format(
-                filename, result
-            )
-        )
+        log = f'_get_last_modification_time filename: {filename}, result: {result}'
+        self._print_to_container_log(log)
         return result
 
     def _get_service_config(self, service_name):
-        output = self.docker_exec(
-            ['cat', '/var/lib/wazo-auth-keys/{}-key.yml'.format(service_name)]
-        )
+        cmd = ['cat', f'/var/lib/wazo-auth-keys/{service_name}-key.yml']
+        output = self.docker_exec(cmd)
         result = yaml.safe_load(output.decode('utf-8'))
-        print(
-            '_get_service_config sevrice: {}, result: {}'.format(service_name, result)
-        )
+        log = f'_get_service_config sevrice: {service_name}, result: {result}'
+        self._print_to_container_log(log)
         return result
 
     def _delete_service(self, username):
