@@ -1,5 +1,4 @@
 debug: True
-foreground: True
 
 rest_api:
   listen: 0.0.0.0
