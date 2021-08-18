@@ -75,6 +75,7 @@ wazo-calld:
     - 'amid.action.ConfbridgeUnmute.create'
     - 'amid.action.MuteAudio.create'
     - 'amid.action.PlayDTMF.create'
+    - 'amid.action.QueuePause.create'
     - 'amid.action.Redirect.create'
     - 'amid.action.Setvar.create'
     - 'amid.action.StopMixMonitor.create'
