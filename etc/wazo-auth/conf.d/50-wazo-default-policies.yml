@@ -30,6 +30,7 @@ default_policies:
       - 'confd.users.me.forwards.*.*'
       - 'confd.users.me.funckeys.*'
       - 'confd.users.me.funckeys.*.*'
+      - 'confd.users.me.meetings.#'
       - 'confd.users.me.read'
       - 'confd.users.me.services.*.*'
       - 'confd.users.me.update'
