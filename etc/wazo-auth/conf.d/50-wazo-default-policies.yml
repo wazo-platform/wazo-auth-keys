@@ -1,6 +1,4 @@
-backend_policies:
-  ldap_user: 'wazo_default_user_policy'
-  wazo_user: 'wazo_default_user_policy'
+default_user_policy: 'wazo_default_user_policy'
 
 default_policies:
   wazo_default_user_policy:
