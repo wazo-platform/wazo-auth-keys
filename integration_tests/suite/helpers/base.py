@@ -5,7 +5,7 @@ import os
 import yaml
 
 from wazo_auth_client import Client as AuthClient
-from xivo_test_helpers.asset_launching_test_case import AssetLaunchingTestCase
+from wazo_test_helpers.asset_launching_test_case import AssetLaunchingTestCase
 
 ASSETS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'assets'))
 
