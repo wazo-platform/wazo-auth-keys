@@ -180,6 +180,7 @@ wazo-stat:
 wazo-upgrade:
   system_user: root
   acl:
+    - 'amid.#'
     - 'auth.#'
     - 'confd.#'
     - 'dird.#'
