@@ -83,6 +83,7 @@ wazo-calld:
     - 'amid.action.MixMonitor.create'
     - 'amid.action.ShowDialplan.create'
     - 'auth.tenants.read'
+    - 'auth.users.*.tokens.read'
     - 'confd.#'
     - 'phoned.endpoints.*.hold.start'
     - 'phoned.endpoints.*.hold.stop'
