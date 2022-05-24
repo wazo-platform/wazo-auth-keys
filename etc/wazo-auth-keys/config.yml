@@ -195,6 +195,11 @@ wazo-webhookd:
     - 'auth.users.*.external.mobile.read'
     - 'auth.users.*.read'
 
+wazo-websocketd:
+  system_user: wazo-websocketd
+  acl:
+    - 'auth.tenants.read'
+
 wazo-wizard:
   system_user: www-data
   acl:
