@@ -1,14 +1,15 @@
-# Copyright 2018-2020 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
 
 from xivo.chain_map import ChainMap
-from xivo.config_helper import parse_config_dir
+from xivo.config_helper import (
+    parse_config_dir,
+    read_config_file_hierarchy_accumulating_list,
+)
 
 from wazo_auth_cli.config import _DEFAULT_CONFIG
-
-from .config_helper import read_config_file_hierarchy
 
 SERVICES_CONFIG_FILE = 'config.yml'
 SERVICES_EXTRA_CONFIG = 'conf.d'
@@ -23,7 +24,7 @@ def _read_user_config(parsed_args):
 
 def build(parsed_args):
     user_file_config = _read_user_config(parsed_args)
-    system_file_config = read_config_file_hierarchy(
+    system_file_config = read_config_file_hierarchy_accumulating_list(
         ChainMap(user_file_config, _DEFAULT_CONFIG)
     )
     final_config = ChainMap(user_file_config, system_file_config, _DEFAULT_CONFIG)
@@ -36,7 +37,7 @@ def load_services(parsed_args):
         'config_file': os.path.join(services_dir, SERVICES_CONFIG_FILE),
         'extra_config_files': os.path.join(services_dir, SERVICES_EXTRA_CONFIG),
     }
-    services = read_config_file_hierarchy(services_config)
+    services = read_config_file_hierarchy_accumulating_list(services_config)
     services.pop('config_file', None)
     services.pop('extra_config_files', None)
     return services
