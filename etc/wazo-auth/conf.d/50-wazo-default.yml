@@ -77,3 +77,8 @@ default_policies:
 
       - 'events.#'
       - 'websocketd'
+
+tenant_default_groups:
+  wazo_default_admin_group:
+    policies:
+      wazo_default_admin_policy: true
