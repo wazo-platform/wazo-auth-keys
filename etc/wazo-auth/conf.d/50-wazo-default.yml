@@ -82,3 +82,9 @@ tenant_default_groups:
   wazo_default_admin_group:
     policies:
       wazo_default_admin_policy: true
+
+enabled_metadata_plugins:
+  user_admin_status: true
+
+purpose_metadata_mapping:
+  user: [user_admin_status]
