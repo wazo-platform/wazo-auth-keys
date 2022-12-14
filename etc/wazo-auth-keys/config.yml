@@ -94,10 +94,16 @@ wazo-chatd:
   acl:
     - 'amid.action.CoreShowChannels.create'
     - 'amid.action.DeviceStateList.create'
+    - 'auth.*.external.config.read'
+    - 'auth.*.external.users.read'
+    - 'auth.users.*.external.*.read'
+    - 'auth.users.*.read'
     - 'auth.sessions.read'
     - 'auth.tenants.read'
     - 'auth.tokens.read'
+    - 'confd.ingresses.http.read'
     - 'confd.users.read'
+    - 'confd.users.*.services.dnd.*'
 
 wazo-confd:
   system_user: www-data
