@@ -1,4 +1,4 @@
-# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
@@ -14,7 +14,6 @@ from .file_manager import FileManager
 
 
 class WazoAuthKeys(App):
-
     DEFAULT_VERBOSE_LEVEL = 0
 
     def __init__(self):
