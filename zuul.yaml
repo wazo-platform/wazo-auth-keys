@@ -1,15 +1,15 @@
 - job:
     name: wazo-tox-integration-auth-keys
-    parent: wazo-tox-integration
+    parent: wazo-tox-integration-py39
     vars:
       docker_compose_services_override:
         - auth-keys
 
 - project:
     templates:
-      - wazo-tox-linters
-      - wazo-tox-py37
-      - debian-packaging-template
+      - wazo-tox-linters-310
+      - wazo-tox-py39
+      - debian-packaging-bullseye
     check:
       jobs:
         - wazo-tox-integration-auth-keys
