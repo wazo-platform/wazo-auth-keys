@@ -5,7 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE='true'
 COPY . /usr/src/wazo-auth-keys
 
 WORKDIR /usr/src/wazo-auth-keys
-RUN python setup.py develop
+RUN python3 -m pip install -e .
 
 RUN true \
     && mkdir -p /etc/wazo-auth-keys/conf.d \
