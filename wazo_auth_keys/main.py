@@ -6,7 +6,6 @@ import sys
 
 from cliff.app import App
 from cliff.commandmanager import CommandManager
-
 from wazo_auth_client import Client
 
 from . import config
