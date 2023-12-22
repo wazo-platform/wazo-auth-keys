@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
-import yaml
 
+import yaml
 from wazo_auth_client import Client as AuthClient
 from wazo_test_helpers.asset_launching_test_case import AssetLaunchingTestCase
 

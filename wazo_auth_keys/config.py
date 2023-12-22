@@ -1,15 +1,14 @@
-# Copyright 2018-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
 
+from wazo_auth_cli.config import _DEFAULT_CONFIG
 from xivo.chain_map import ChainMap
 from xivo.config_helper import (
     parse_config_dir,
     read_config_file_hierarchy_accumulating_list,
 )
-
-from wazo_auth_cli.config import _DEFAULT_CONFIG
 
 SERVICES_CONFIG_FILE = 'config.yml'
 SERVICES_EXTRA_CONFIG = 'conf.d'
