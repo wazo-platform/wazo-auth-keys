@@ -77,7 +77,6 @@ wazo-calld:
     - 'amid.action.MuteAudio.create'
     - 'amid.action.Park.create'
     - 'amid.action.ParkedCalls.create'
-    - 'amid.action.Parkinglots.create'
     - 'amid.action.PlayDTMF.create'
     - 'amid.action.QueuePause.create'
     - 'amid.action.Redirect.create'
