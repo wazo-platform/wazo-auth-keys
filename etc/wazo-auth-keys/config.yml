@@ -76,6 +76,7 @@ wazo-calld:
     - 'amid.action.ConfbridgeUnmute.create'
     - 'amid.action.MuteAudio.create'
     - 'amid.action.Park.create'
+    - 'amid.action.Parkinglots.create'
     - 'amid.action.ParkedCalls.create'
     - 'amid.action.PlayDTMF.create'
     - 'amid.action.QueuePause.create'
