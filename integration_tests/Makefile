@@ -1,6 +1,6 @@
 .PHONY: test-setup test egg-info auth-keys-test db
 
-AUTH_DIR ?= ../../auth/
+AUTH_DIR ?= ${LOCAL_GIT_REPOS}/wazo-auth/
 
 test-setup: egg-info auth-keys-test
 
