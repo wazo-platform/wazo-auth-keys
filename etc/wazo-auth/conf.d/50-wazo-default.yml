@@ -26,6 +26,7 @@ default_policies:
       - 'chatd.users.presences.read'
       - 'confd.infos.read'
       - 'confd.users.me.#.read'
+      - 'confd.users.me.forwards.*'
       - 'confd.users.me.forwards.*.*'
       - 'confd.users.me.funckeys.*'
       - 'confd.users.me.funckeys.*.*'
