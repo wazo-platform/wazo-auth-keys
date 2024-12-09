@@ -39,6 +39,7 @@ wazo-agid:
     - 'confd.lines.read'
     - 'confd.users.*.forwards.#'
     - 'confd.users.*.services.*.*'
+    - 'confd.users.*.callerids.outgoing.read'
     - 'dird.directories.reverse.*.*.read'
 
 wazo-auth:
