@@ -122,6 +122,8 @@ wazo-dird:
   acl:
     - 'auth.tenants.read'
     - 'auth.users.*.read'
+    - 'confd.tenants.read'
+    - 'confd.localization.read'
 
 wazo-dird-conference-backend:
   system_user: www-data
