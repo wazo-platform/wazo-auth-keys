@@ -6,7 +6,7 @@ default_policies:
     acl:
       - 'agentd.users.me.#'
       - 'auth.users.me.external.#'
-      - 'auth.users.me.password.edit'
+      - 'auth.users.me.password.update'
       - 'auth.users.me.sessions.*.delete'
       - 'auth.users.me.sessions.read'
       - 'auth.users.me.tokens.*.delete'
