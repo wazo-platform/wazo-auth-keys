@@ -31,6 +31,8 @@ wazo-agid:
     - 'auth.users.*.tokens.read'
     - 'calld.calls.*.record.start.update'
     - 'calld.calls.*.record.stop.update'
+    - 'calld.calls.*.record.pause.update'
+    - 'calld.calls.*.record.resume.update'
     - 'confd.devices.*.autoprov.read'
     - 'confd.devices.*.synchronize.read'
     - 'confd.devices.read'
