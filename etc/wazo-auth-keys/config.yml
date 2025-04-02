@@ -43,6 +43,7 @@ wazo-agid:
     - 'confd.users.*.services.*.*'
     - 'confd.users.*.callerids.outgoing.read'
     - 'dird.directories.reverse.*.*.read'
+    - 'dird.graphql.user'
 
 wazo-auth:
   system_user: wazo-auth
