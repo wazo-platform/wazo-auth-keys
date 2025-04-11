@@ -42,6 +42,7 @@ wazo-agid:
     - 'confd.users.*.forwards.#'
     - 'confd.users.*.services.*.*'
     - 'confd.users.*.callerids.outgoing.read'
+    - 'confd.users.*.blocklist.read'
     - 'dird.directories.reverse.*.*.read'
     - 'dird.graphql.user'
 
