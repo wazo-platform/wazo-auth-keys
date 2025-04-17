@@ -205,8 +205,10 @@ wazo-webhookd:
   system_user: wazo-webhookd
   acl:
     - 'auth.mobile.external.config.read'
+    - 'auth.tenants.read'
     - 'auth.users.*.external.mobile.read'
     - 'auth.users.*.read'
+    - 'auth.users.read'
 
 wazo-websocketd:
   system_user: wazo-websocketd
