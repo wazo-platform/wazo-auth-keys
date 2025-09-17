@@ -1,4 +1,4 @@
-FROM wazoplatform/wazo-auth-cli
+FROM wazoplatform/wazo-auth-cli:bookworm
 
 ENV PYTHONDONTWRITEBYTECODE='true'
 
