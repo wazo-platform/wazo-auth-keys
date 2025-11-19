@@ -61,6 +61,7 @@ default_policies:
       - 'events.switchboards.#'
       - 'events.transfers.me'
       - 'events.users.me.#'
+      - 'events.voicemails.global.messages.#'
       - 'webhookd.users.me.subscriptions.#'
       - 'websocketd'
   wazo_default_admin_policy:
