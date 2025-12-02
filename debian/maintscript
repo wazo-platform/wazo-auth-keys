@@ -1,1 +1,0 @@
-mv_conffile /etc/wazo-auth/conf.d/50-wazo-default-policies.yml /etc/wazo-auth/conf.d/50-wazo-default.yml 22.10
