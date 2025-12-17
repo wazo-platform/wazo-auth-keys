@@ -81,6 +81,7 @@ wazo-calld:
     - 'amid.action.ConfbridgeStopRecord.create'
     - 'amid.action.ConfbridgeUnmute.create'
     - 'amid.action.MuteAudio.create'
+    - 'amid.action.Originate.create'
     - 'amid.action.Park.create'
     - 'amid.action.Parkinglots.create'
     - 'amid.action.ParkedCalls.create'
