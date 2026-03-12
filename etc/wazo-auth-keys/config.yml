@@ -94,6 +94,7 @@ wazo-calld:
     - 'amid.action.ShowDialplan.create'
     - 'auth.tenants.read'
     - 'auth.users.*.tokens.read'
+    - 'call-logd.voicemails.transcriptions.read'
     - 'confd.#'
     - 'phoned.endpoints.*.hold.start'
     - 'phoned.endpoints.*.hold.stop'
