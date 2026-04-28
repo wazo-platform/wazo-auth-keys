@@ -21,6 +21,7 @@ default_policies:
       - 'calld.users.me.#'
       - 'calld.users.me.conferences.*.participants.read'
       - 'chatd.users.*.presences.read'
+      - 'chatd.users.me.identities.read'
       - 'chatd.users.me.presences.update'
       - 'chatd.users.me.rooms.#'
       - 'chatd.users.presences.read'
