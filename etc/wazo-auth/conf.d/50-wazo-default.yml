@@ -41,6 +41,7 @@ default_policies:
       - 'dird.directories.personal.*.read'
       - 'dird.graphql.me'
       - 'dird.personal.#'
+      - 'events.auth.users.me.deleted'
       - 'events.auth.users.me.external.#'
       - 'events.auth.users.me.sessions.my_session.expire_soon'
       - 'events.call_log.user.me.created'
