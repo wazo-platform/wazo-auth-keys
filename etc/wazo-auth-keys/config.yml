@@ -64,6 +64,7 @@ wazo-call-logd:
     - 'confd.contexts.read'
     - 'confd.lines.read'
     - 'confd.users.*.read'
+    - 'confd.voicemails.read'
 
 wazo-call-logd-export:
   system_user: wazo-call-logd
