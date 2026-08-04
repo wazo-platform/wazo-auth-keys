@@ -155,6 +155,7 @@ wazo-phoned:
     - 'amid.action.Command.create'
     - 'amid.action.PJSIPNotify.create'
     - 'auth.tenants.read'
+    - 'auth.users.*.external.*.read'
     - 'auth.users.*.read'
     - 'confd.extensions.features.read'
     - 'confd.users.*.read'
