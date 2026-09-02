@@ -142,6 +142,7 @@ wazo-dird-wazo-backend:
   acl:
     - 'auth.tenants.read'
     - 'confd.infos.read'
+    - 'confd.users.*.read'
     - 'confd.users.read'
 
 wazo-dxtora:
