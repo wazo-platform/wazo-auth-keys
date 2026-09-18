@@ -88,6 +88,7 @@ wazo-calld:
     - 'amid.action.ParkedCalls.create'
     - 'amid.action.PlayDTMF.create'
     - 'amid.action.QueuePause.create'
+    - 'amid.action.QueueStatus.create'
     - 'amid.action.Redirect.create'
     - 'amid.action.Setvar.create'
     - 'amid.action.StopMixMonitor.create'
