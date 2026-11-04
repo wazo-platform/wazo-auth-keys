@@ -86,6 +86,7 @@ wazo-calld:
     - 'amid.action.Park.create'
     - 'amid.action.Parkinglots.create'
     - 'amid.action.ParkedCalls.create'
+    - 'amid.action.PJSIPShowRegistrationsOutbound.create'
     - 'amid.action.PlayDTMF.create'
     - 'amid.action.QueuePause.create'
     - 'amid.action.QueueStatus.create'
